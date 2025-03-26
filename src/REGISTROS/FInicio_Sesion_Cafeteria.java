@@ -8,6 +8,7 @@ import FORMULARIOS.Panel_Empleados;
 import FORMULARIOS.Panel_Familia;
 import FORMULARIOS.Panel_Ingredientes;
 import FORMULARIOS.Panel_Producto;
+import FORMULARIOS.Panel_Ventas;
 
 
 
@@ -29,7 +30,7 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
     
     public void desplegar(JPanel p ){
         
-        p.setSize(1230, 630);
+        p.setSize(1260, 670);
         p.setLocation(0,0);
         ancla1.removeAll();
         ancla1.add(p, BorderLayout.CENTER);
@@ -66,6 +67,7 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         btnproducto = new javax.swing.JButton();
         btnnutrientes = new javax.swing.JButton();
         ancla1 = new javax.swing.JPanel();
+        btnventas = new javax.swing.JButton();
         menu = new javax.swing.JButton();
 
         jMenu3.setText("File");
@@ -147,9 +149,32 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         btnnutrientes.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnnutrientes.setForeground(new java.awt.Color(0, 0, 0));
         btnnutrientes.setText("INGREDIENTES");
+        btnnutrientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnnutrientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnnutrientesActionPerformed(evt);
+            }
+        });
+
+        ancla1.setBackground(new java.awt.Color(209, 235, 247));
+        ancla1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 255), null));
+
+        javax.swing.GroupLayout ancla1Layout = new javax.swing.GroupLayout(ancla1);
+        ancla1.setLayout(ancla1Layout);
+        ancla1Layout.setHorizontalGroup(
+            ancla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1256, Short.MAX_VALUE)
+        );
+        ancla1Layout.setVerticalGroup(
+            ancla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 666, Short.MAX_VALUE)
+        );
+
+        btnventas.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnventas.setText("VENTAS");
+        btnventas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnventasActionPerformed(evt);
             }
         });
 
@@ -160,50 +185,42 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
             .addGroup(pnmenuLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnproducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnempleados, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                     .addGroup(pnmenuLayout.createSequentialGroup()
-                        .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnproducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnempleados, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnmenuLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(btnclientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnfamilia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(23, 23, 23))
-                    .addGroup(pnmenuLayout.createSequentialGroup()
-                        .addComponent(btnnutrientes)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnclientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnfamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnnutrientes)
+                    .addComponent(btnventas, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11))
         );
         pnmenuLayout.setVerticalGroup(
             pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnmenuLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addComponent(btnclientes)
-                .addGap(18, 18, 18)
-                .addComponent(btnempleados)
-                .addGap(18, 18, 18)
-                .addComponent(btnfamilia)
-                .addGap(18, 18, 18)
-                .addComponent(btnproducto)
-                .addGap(18, 18, 18)
-                .addComponent(btnnutrientes)
-                .addContainerGap(389, Short.MAX_VALUE))
-        );
-
-        ancla1.setBackground(new java.awt.Color(209, 235, 247));
-        ancla1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 255), null));
-
-        javax.swing.GroupLayout ancla1Layout = new javax.swing.GroupLayout(ancla1);
-        ancla1.setLayout(ancla1Layout);
-        ancla1Layout.setHorizontalGroup(
-            ancla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1226, Short.MAX_VALUE)
-        );
-        ancla1Layout.setVerticalGroup(
-            ancla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 626, Short.MAX_VALUE)
+                .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnmenuLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnclientes)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnempleados)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnfamilia)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnproducto)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnnutrientes)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnventas))
+                    .addGroup(pnmenuLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         menu.setBackground(new java.awt.Color(209, 235, 247));
@@ -222,10 +239,8 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
             .addGroup(anclaLayout.createSequentialGroup()
                 .addComponent(pnmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         anclaLayout.setVerticalGroup(
             anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,8 +248,6 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
             .addGroup(anclaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(menu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -242,11 +255,11 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ancla, javax.swing.GroupLayout.DEFAULT_SIZE, 1506, Short.MAX_VALUE)
+            .addComponent(ancla, javax.swing.GroupLayout.DEFAULT_SIZE, 1580, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ancla, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+            .addComponent(ancla, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
         );
 
         pack();
@@ -298,6 +311,12 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
           
     }//GEN-LAST:event_menuActionPerformed
 
+    private void btnventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnventasActionPerformed
+
+        Panel_Ventas p = new Panel_Ventas();
+        desplegar(p);
+    }//GEN-LAST:event_btnventasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -341,6 +360,7 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
     private javax.swing.JButton btnfamilia;
     private javax.swing.JButton btnnutrientes;
     private javax.swing.JButton btnproducto;
+    private javax.swing.JButton btnventas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
