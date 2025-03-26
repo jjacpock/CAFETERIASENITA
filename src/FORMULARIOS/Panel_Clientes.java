@@ -21,7 +21,7 @@ public class Panel_Clientes extends javax.swing.JPanel {
     
     
     public Panel_Clientes() {
-         
+         initComponents();
         
             String columnas_tb[] ={"Cedula","Nombre","Telefono","Correo","Dirección","Genero","Fecha De Nacimiento"};
             
