@@ -610,10 +610,22 @@ for(int i = 0; i < ADT; i++) {
             con.ConexionPostgres();
             
             //query o consulta
-            String query = "insert into productos values("+ IDproducto +" , '"+Nombre +"', '"+Familia + "', "+Precio +" , '"+Descripcion + "', '" + Ingredientes + "' )";
+            String query = "insert into productos values(?, ?, ?, ?, ?, ?)";
+            
+            PreparedStatement ps = con.getConnection().prepareStatement(query);
+            
+            ps.setLong(1, IDproducto);
+            ps.setString(2, Nombre);
+            ps.setString(3, Familia);
+            ps.setDouble(4, Precio);
+            ps.setString(5, Descripcion);
+            ps.setArray(6, con.getConnection().createArrayOf("integer", vector.toArray()));
+            
+            ps.executeUpdate();
+            
             
             System.out.println(query);
-            con.actualizar(query);
+
             
             JOptionPane.showMessageDialog(null, "PRODUCTO INSERTADO");
             
