@@ -18,7 +18,7 @@ public class Panel_Familia extends javax.swing.JPanel {
     DefaultTableModel tb = new DefaultTableModel();
 
     public Panel_Familia() {
-        
+        initComponents();
         
         String ids [] = {"ID_FAMILIA","NOMBRE","DESCRIPCION"};
         tb.setColumnIdentifiers(ids);
