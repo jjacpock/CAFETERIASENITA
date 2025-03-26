@@ -109,11 +109,11 @@ public class Panel_Producto extends javax.swing.JPanel {
              
               while(rs.next()){
               
-                  Long  Ingrediente_ID = rs.getLong("id_ingrediente");
+                  long  Ingrediente_ID = rs.getLong("id_ingrediente");
                   String Ingrediente_N = rs.getString("nombre_ingrediente");
-                  System.out.println(Ingrediente_ID+" - "+Ingrediente_N);
+                  System.out.println(Ingrediente_ID+" - "+Ingrediente_N.trim());
                   
-                  ingredientes.addItem(""+Ingrediente_ID);
+                  ingredientes.addItem(String.valueOf(Ingrediente_ID)+" - "+Ingrediente_N.trim());
               
               }
               
@@ -601,7 +601,7 @@ for(int i = 0; i < ADT; i++) {
             String Descripcion= descripcion.getText().trim();
             
             //Ingrediente
-            String Ingredientes= ingredientes.getSelectedItem().toString();
+            String Ingredientes= a_vector.getText().toString();
             
                     
             //Establecer Conexión con la base de datos
@@ -610,7 +610,7 @@ for(int i = 0; i < ADT; i++) {
             con.ConexionPostgres();
             
             //query o consulta
-            String query = "insert into productos values("+ IDproducto +" , '"+Nombre +" ', ' "+Familia + " ', "+Precio +" , '"+Descripcion + " ', ' " + Ingredientes + " ' )";
+            String query = "insert into productos values("+ IDproducto +" , '"+Nombre +"', '"+Familia + "', "+Precio +" , '"+Descripcion + "', '" + Ingredientes + "' )";
             
             System.out.println(query);
             con.actualizar(query);
@@ -942,7 +942,8 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
         java.util.StringTokenizer st = new java.util.StringTokenizer(cod_ingrediente,"-");
         
         String token = st.nextToken();
-        vector.add(Integer.valueOf(token));
+        System.out.println("token="+token);
+       vector.add(Integer.valueOf(token.trim()));
         cad+=token+" , ";
         
         System.out.println("longitud ="+cad.length());
