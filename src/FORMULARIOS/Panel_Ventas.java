@@ -4,6 +4,11 @@
  */
 package FORMULARIOS;
 
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,7 +41,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        categoria = new javax.swing.JComboBox<>();
+        id = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -62,12 +67,12 @@ public class Panel_Ventas extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("CATEGORIA:");
+        jLabel1.setText("ID_Venta");
 
-        categoria.setBackground(new java.awt.Color(209, 235, 247));
-        categoria.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        categoria.setForeground(new java.awt.Color(0, 0, 0));
-        categoria.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        id.setBackground(new java.awt.Color(209, 235, 247));
+        id.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        id.setForeground(new java.awt.Color(0, 0, 0));
+        id.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,7 +189,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(40, 40, 40)
-                        .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(jLabel2)
                         .addGap(40, 40, 40)
@@ -235,7 +240,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
-                        .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
                         .addComponent(jLabel3)
                         .addComponent(idventa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,7 +294,79 @@ public class Panel_Ventas extends javax.swing.JPanel {
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        // TODO add your handling code here:
+        
+             
+        try {
+            //Asignar orden de los datos en la tabla
+            
+            int ADT = tb.getRowCount();
+            
+            for(int i = 0; i<ADT; i++){
+                
+                //Asignar Dato en la Tabla (ID)
+                long ID_ADT = Long.parseLong(tb.getValueAt(i, 0).toString());
+                
+                //Asignar Dato en la Tabla (Fecha de Venta)
+                String FechaVenta_ADT = tb.getValueAt(i, 1).toString();
+                
+                //Asignar Dato en la Tabla (Datos Cliente)
+                String DatosCliente_ADT = tb.getValueAt(i, 2).toString();
+                
+                //Asignar Dato en la Tabla (Datos Empleado)
+                String DatosEmpleado_ADT = tb.getValueAt(i, 3).toString();
+                
+                //Asignar Dato en la Tabla (Forma De Pago)
+                String FormaDePago_ADT = tb.getValueAt(i, 4).toString();
+                
+                //Asignar Dato en la Tabla (Total Venta)              
+                String TotalVenta_ADT = tb.getValueAt(i, 5).toString();
+
+            }
+            
+            //Obtener Los Datos Para Insertarlos
+            
+            //ID de venta
+            long Id = Long.parseLong(id.getSelectedItem().toString());
+            
+            //Fecha De Venta
+            Date FechaVenta = fecha.getDate();
+            
+            //Formato de fecha
+            SimpleDateFormat fc = new SimpleDateFormat("yyyy-MM-dd");
+            String facha = fc.format(FechaVenta);
+            
+            //Datos De Cliente
+            String DatosCliente = datoscliente.getSelectedItem().toString();
+            
+            //Datos De Empleado
+            String DatosEmpleado = datosempleado.getSelectedItem().toString();
+            
+            //Forma De pago
+            String FormaPago = pago.getSelectedItem().toString();
+            
+            //Total Venta
+            double TotalVenta = Double.parseDouble(totalventa.getText().trim());
+            
+            
+            //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            //query o consulta
+            String query = "Insert into ventas values("+Id+", '"+facha+"', '"+DatosCliente+"', '"+DatosEmpleado+"', '"+FormaPago+"',"+TotalVenta+")";
+            
+            
+            
+            con.ConexionPostgres();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
     }//GEN-LAST:event_btnguardarActionPerformed
 
 
@@ -299,10 +376,10 @@ public class Panel_Ventas extends javax.swing.JPanel {
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnmostrar;
-    private javax.swing.JComboBox<String> categoria;
     private javax.swing.JComboBox<String> datoscliente;
     private javax.swing.JComboBox<String> datosempleado;
     private com.toedter.calendar.JDateChooser fecha;
+    private javax.swing.JComboBox<String> id;
     private javax.swing.JTextField idventa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
