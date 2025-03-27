@@ -1120,7 +1120,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
     }//GEN-LAST:event_precioKeyReleased
 
     private void descripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descripcionKeyReleased
-        
+             
          //validar tipo de dato
           
         String texto = descripcion.getText().trim();
@@ -1135,6 +1135,8 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
            
            //limpiar
            label_descripcion.setText("");
+           
+           
     }//GEN-LAST:event_descripcionKeyReleased
 
 

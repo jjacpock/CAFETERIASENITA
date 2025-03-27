@@ -26,9 +26,14 @@ public class Panel_Ventas extends javax.swing.JPanel {
         tb.setColumnIdentifiers(ids);
         tabla.setModel(tb);
         
+        //añadir formas de pago
+        pago.addItem("Efectivo");
+        pago.addItem("Con Tarjeta"+" - "+"De Contado");
+        pago.addItem("Con Tarjeta"+" - "+"A Credito");
         
         
-        //llamar familias
+        
+        //llamar id venta
         
          Connection conect = null;
               PreparedStatement loguin = null;
@@ -43,7 +48,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
               
                conect=con.getConnection();
            
-            String query = ("Select * From familias order by id_familia ASC");
+            String query = ("Select * From detalle_ventas order by id_venta ASC");
             
              loguin = conect.prepareStatement(query);
              
@@ -51,11 +56,105 @@ public class Panel_Ventas extends javax.swing.JPanel {
              
               while(rs.next()){
               
-                  Long  Familia_ID = rs.getLong("id_familia");
-                  String Familia_N = rs.getString("nombre_familia");
-                  System.out.println(Familia_ID+" - "+Familia_N);
+                  Long  ID_Venta = rs.getLong("id_venta");
+                  System.out.println(ID_Venta+"");
                   
-                  familia.addItem(Familia_N);
+                  id.addItem(ID_Venta+"");
+              
+              }
+              
+              
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (InstantiationException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (IllegalAccessException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } 
+              finally{
+           try{
+               if(rs != null) rs.close();
+               if(loguin != null)loguin.close();
+               if(conect != null)conect.close();
+           }
+           catch(SQLException e){
+               e.printStackTrace();
+           }
+       }
+         
+         //llamar datos cliente
+         
+         try {
+
+              Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+              
+              con.ConexionPostgres();
+              
+               conect=con.getConnection();
+           
+            String query = ("Select * From clientes order by cedula_cliente ASC");
+            
+             loguin = conect.prepareStatement(query);
+             
+             rs = loguin.executeQuery();
+             
+              while(rs.next()){
+              
+                  Long  Cedula_cliente = rs.getLong("cedula_cliente");
+                  String Nombre_Cliente = rs.getString("nombre_cliente");
+                  System.out.println(Cedula_cliente+" - "+Nombre_Cliente);
+                  
+                  datoscliente.addItem(Cedula_cliente+" - "+Nombre_Cliente);
+              
+              }
+              
+              
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (InstantiationException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (IllegalAccessException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } 
+              finally{
+           try{
+               if(rs != null) rs.close();
+               if(loguin != null)loguin.close();
+               if(conect != null)conect.close();
+           }
+           catch(SQLException e){
+               e.printStackTrace();
+           }
+       }
+         
+         
+                  //llamar datos empleado
+         
+         try {
+
+              Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+              
+              con.ConexionPostgres();
+              
+               conect=con.getConnection();
+           
+            String query = ("Select * From empleados order by cedula_empleado ASC");
+            
+             loguin = conect.prepareStatement(query);
+             
+             rs = loguin.executeQuery();
+             
+              while(rs.next()){
+              
+                  Long  Cedula_Empleado = rs.getLong("cedula_empleado");
+                  String Nombre_Empleado = rs.getString("nombre_empleado");
+                  System.out.println(Cedula_Empleado+" - "+Nombre_Empleado);
+                  
+                  datosempleado.addItem(Cedula_Empleado+" - "+Nombre_Empleado);
               
               }
               
@@ -91,11 +190,9 @@ public class Panel_Ventas extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         id = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         datoscliente = new javax.swing.JComboBox<>();
-        idventa = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         datosempleado = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -123,10 +220,6 @@ public class Panel_Ventas extends javax.swing.JPanel {
         id.setForeground(new java.awt.Color(0, 0, 0));
         id.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("ID_VENTA:");
-
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("FECHA DE VENTA:");
@@ -141,15 +234,6 @@ public class Panel_Ventas extends javax.swing.JPanel {
         datoscliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 datosclienteActionPerformed(evt);
-            }
-        });
-
-        idventa.setBackground(new java.awt.Color(209, 235, 247));
-        idventa.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        idventa.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        idventa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idventaActionPerformed(evt);
             }
         });
 
@@ -254,11 +338,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addGap(40, 40, 40)
                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel2)
-                        .addGap(40, 40, 40)
-                        .addComponent(idventa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addGap(415, 415, 415)
                         .addComponent(jLabel3)
                         .addGap(40, 40, 40)
                         .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -305,9 +385,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(idventa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3))
                     .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -348,10 +426,6 @@ public class Panel_Ventas extends javax.swing.JPanel {
     private void datosclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_datosclienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_datosclienteActionPerformed
-
-    private void idventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idventaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idventaActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         
@@ -782,9 +856,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
     private javax.swing.JComboBox<String> datosempleado;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JComboBox<String> id;
-    private javax.swing.JTextField idventa;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
