@@ -4,6 +4,9 @@
  */
 package FORMULARIOS;
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -147,12 +150,22 @@ public class Panel_Ventas extends javax.swing.JPanel {
         btnbuscar.setText("BUSCAR");
         btnbuscar.setToolTipText("");
         btnbuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
+            }
+        });
 
         btneditar.setBackground(new java.awt.Color(112, 138, 147));
         btneditar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btneditar.setForeground(new java.awt.Color(0, 0, 0));
         btneditar.setText("EDITAR");
         btneditar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        btneditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditarActionPerformed(evt);
+            }
+        });
 
         btneliminar.setBackground(new java.awt.Color(112, 138, 147));
         btneliminar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -293,13 +306,69 @@ public class Panel_Ventas extends javax.swing.JPanel {
     }//GEN-LAST:event_idventaActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        // TODO add your handling code here:
+        
+         int confirmacion;
+        
+        int fila= tabla.getSelectedRow();
+        
+        if(fila==-1){
+            
+            JOptionPane.showMessageDialog(null, "Seleccione una fila primero","Seleccionar fila",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            
+         confirmacion= JOptionPane.showConfirmDialog(null,"¿Esta Seguro de Eliminar la linea seleccionada?","Confirmación Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.ERROR_MESSAGE);
+            if(confirmacion==JOptionPane.YES_OPTION){
+                
+                
+
+             try {
+                 String Id_venta = tabla.getValueAt(fila, 0).toString();
+                 
+                 Conexion  con= new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+                 
+                 con.ConexionPostgres();
+                 
+                 String query_delete = "DELETE FROM ventas WHERE id_venta= ' "+Id_venta+" ' ";
+                 int FilasAfectadas = con.actualizar1(query_delete);
+                 
+                 if(FilasAfectadas > 0){
+                     JOptionPane.showMessageDialog(null, "Venta eliminada con exíto");
+                     
+                     ((DefaultTableModel)tabla.getModel()).removeRow(fila);
+                 }
+                 else{
+                     
+                     JOptionPane.showMessageDialog(null, "No Hay dicha venta en la base de Datos");
+                 }
+                 con.cerrar();
+                 
+                 tb.removeRow(tabla.getSelectedRow());
+             } catch (ClassNotFoundException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (SQLException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (InstantiationException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IllegalAccessException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             }
+                 
+            }
+        }
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        
-             
+
         try {
+
+
+            //Validar Datos
+            if(totalventa.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "Debe rellenar el campo del total de la venta", "Campo Vacio", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             //Asignar orden de los datos en la tabla
             
             int ADT = tb.getRowCount();
@@ -455,6 +524,203 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
 }
             
     }//GEN-LAST:event_btnmostrarActionPerformed
+
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+        
+         //Declarar variables
+       Connection conect = null;
+       PreparedStatement search = null;
+       ResultSet rs = null;
+        
+        
+        //try catch
+          try{
+            Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+           
+           con.ConexionPostgres();
+           
+           conect=con.getConnection();
+           
+            String Mostrar = ("SELECT * FROM ventas WHERE id_venta = ?");
+            
+              search = conect.prepareStatement(Mostrar);
+              
+              long IdBuscar = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese la Cedula para buscar", "Buscar", JOptionPane.INFORMATION_MESSAGE));
+              search.setLong(1, IdBuscar);
+              
+           rs= search.executeQuery();
+            
+           if(rs.next()){
+   
+               id.setSelectedItem(rs.getString("id_venta"));
+               fecha.setDate(rs.getDate("fecha_venta"));
+               datoscliente.setSelectedItem(rs.getString("datoscliente_venta"));
+               datosempleado.setSelectedItem(rs.getString("datosempleado_venta"));
+               pago.setSelectedItem(rs.getString("formapago_venta"));
+               totalventa.setText(rs.getString("total_venta"));
+               
+               
+               JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
+               
+           }else{
+               JOptionPane.showMessageDialog(null, "Registro no encontrado", "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
+           }
+       }
+       catch(NumberFormatException e){
+           JOptionPane.showMessageDialog(null, "Ingrese un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+        catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Error en la base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+       catch(HeadlessException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
+           JOptionPane.showMessageDialog(null, "Error inesperado", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+        finally{
+           try {
+               if(rs != null) rs.close();
+               if(search != null)search.close();
+               if(conect != null)conect.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
+        
+    
+         try {
+
+
+            //Validar Datos
+            if(totalventa.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "Debe rellenar el campo del total de la venta", "Campo Vacio", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            //Asignar orden de los datos en la tabla
+            
+            int ADT = tb.getRowCount();
+            
+            for(int i = 0; i<ADT; i++){
+                
+                //Asignar Dato en la Tabla (ID)
+                long ID_ADT = Long.parseLong(tb.getValueAt(i, 0).toString());
+                
+                //Asignar Dato en la Tabla (Fecha de Venta)
+                String FechaVenta_ADT = tb.getValueAt(i, 1).toString();
+                
+                //Asignar Dato en la Tabla (Datos Cliente)
+                String DatosCliente_ADT = tb.getValueAt(i, 2).toString();
+                
+                //Asignar Dato en la Tabla (Datos Empleado)
+                String DatosEmpleado_ADT = tb.getValueAt(i, 3).toString();
+                
+                //Asignar Dato en la Tabla (Forma De Pago)
+                String FormaDePago_ADT = tb.getValueAt(i, 4).toString();
+                
+                //Asignar Dato en la Tabla (Total Venta)              
+                String TotalVenta_ADT = tb.getValueAt(i, 5).toString();
+
+            }
+            
+            //Obtener Los Datos Para Insertarlos
+            
+            //ID de venta
+            long Id = Long.parseLong(id.getSelectedItem().toString());
+            
+            //Fecha De Venta
+            Date FechaVenta = fecha.getDate();
+            
+            //Formato de fecha
+            SimpleDateFormat fc = new SimpleDateFormat("yyyy-MM-dd");
+            String facha = fc.format(FechaVenta);
+            
+            //Datos De Cliente
+            String DatosCliente = datoscliente.getSelectedItem().toString();
+            
+            //Datos De Empleado
+            String DatosEmpleado = datosempleado.getSelectedItem().toString();
+            
+            //Forma De pago
+            String FormaPago = pago.getSelectedItem().toString();
+            
+            //Total Venta
+            double TotalVenta = Double.parseDouble(totalventa.getText().trim());
+            
+            
+            //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            //query o consulta
+            String query = "update ventas set"
+                    +"fecha_venta= '"+FechaVenta+" ', "
+                    +"datoscliente_venta= '"+DatosCliente+" ', "
+                    +"datosempleado_venta= '"+DatosEmpleado+" ', "
+                    +"formapago_venta= '"+FormaPago+" ' "
+                    +"WHERE id_venta= "+Id;
+            
+            System.out.println(query);
+            con.actualizar(query);
+            
+            JOptionPane.showMessageDialog(null, "VENTA ACTUALIZADA CON EXITO");
+            
+            //Cerrar conexión
+            con.cerrar();
+                     
+            //Mostrar Los Datos En La Tabla
+            tb.addRow(new Object []{Id, facha, DatosCliente, DatosEmpleado, FormaPago, TotalVenta} );
+            
+            
+            //Limpiar Los Campos
+            totalventa.setText("");
+            
+            
+            con.ConexionPostgres();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //Listar Desde La BD
+        tb.setRowCount(0);
+        
+        //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            try{
+                
+                con.ConexionPostgres();
+                
+                String seleccionar = "SELECT * FROM ventas";
+                
+                ResultSet rs = con.consultar(seleccionar);
+                
+                while(rs.next()){
+                    
+                    tb.addRow(new Object[]{
+                    
+                    rs.getLong("id_venta"),
+                    rs.getString("fecha_venta"),
+                    rs.getString("datoscliente_venta"),
+                    rs.getString("datosempleado_venta"),
+                    rs.getString("formapago_venta"),
+                    rs.getDouble("total_venta")
+                            
+                    });
+                }                            
+            }catch (Exception ex) {
+ex.printStackTrace();
+
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE DATOS");
+}
+    }//GEN-LAST:event_btneditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
