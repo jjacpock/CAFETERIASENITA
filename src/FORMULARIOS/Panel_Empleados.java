@@ -4,6 +4,7 @@
  */
 package FORMULARIOS;
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,6 +36,13 @@ public class Panel_Empleados extends javax.swing.JPanel {
         
             genero.addItem("M");
             genero.addItem("F");
+            
+             label_cedula.setText("");
+            label_nombre.setText("");
+            label_telefono.setText("");
+            label_correo.setText("");
+            label_direccion.setText("");
+            label_barra_like.setText("");
            
         
     }
@@ -52,7 +60,7 @@ public class Panel_Empleados extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cedula2 = new javax.swing.JTextField();
+        cedula = new javax.swing.JTextField();
         correo = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -72,6 +80,12 @@ public class Panel_Empleados extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         genero = new javax.swing.JComboBox<>();
+        label_cedula = new javax.swing.JLabel();
+        label_nombre = new javax.swing.JLabel();
+        label_telefono = new javax.swing.JLabel();
+        label_correo = new javax.swing.JLabel();
+        label_direccion = new javax.swing.JLabel();
+        label_barra_like = new javax.swing.JLabel();
 
         jPanel6.setBackground(new java.awt.Color(228, 242, 247));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 0, 0)), "DATOS DEL EMPLEADO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 36), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -88,13 +102,18 @@ public class Panel_Empleados extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("NOMBRE:");
 
-        cedula2.setBackground(new java.awt.Color(209, 235, 247));
-        cedula2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        cedula2.setForeground(new java.awt.Color(0, 0, 0));
-        cedula2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
-        cedula2.addActionListener(new java.awt.event.ActionListener() {
+        cedula.setBackground(new java.awt.Color(209, 235, 247));
+        cedula.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        cedula.setForeground(new java.awt.Color(0, 0, 0));
+        cedula.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cedula2ActionPerformed(evt);
+                cedulaActionPerformed(evt);
+            }
+        });
+        cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cedulaKeyReleased(evt);
             }
         });
 
@@ -107,6 +126,11 @@ public class Panel_Empleados extends javax.swing.JPanel {
                 correoActionPerformed(evt);
             }
         });
+        correo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                correoKeyReleased(evt);
+            }
+        });
 
         nombre.setBackground(new java.awt.Color(209, 235, 247));
         nombre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -115,6 +139,11 @@ public class Panel_Empleados extends javax.swing.JPanel {
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
+            }
+        });
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nombreKeyReleased(evt);
             }
         });
 
@@ -126,6 +155,11 @@ public class Panel_Empleados extends javax.swing.JPanel {
         direccion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         direccion.setForeground(new java.awt.Color(0, 0, 0));
         direccion.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        direccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                direccionKeyReleased(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -144,6 +178,11 @@ public class Panel_Empleados extends javax.swing.JPanel {
                 telefonoActionPerformed(evt);
             }
         });
+        telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                telefonoKeyReleased(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
@@ -159,6 +198,9 @@ public class Panel_Empleados extends javax.swing.JPanel {
         busqueda.setForeground(new java.awt.Color(0, 0, 0));
         busqueda.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
         busqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                busquedaKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 busquedaKeyTyped(evt);
             }
@@ -233,6 +275,30 @@ public class Panel_Empleados extends javax.swing.JPanel {
         genero.setForeground(new java.awt.Color(0, 0, 0));
         genero.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
 
+        label_cedula.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_cedula.setForeground(new java.awt.Color(255, 51, 51));
+        label_cedula.setText("jLabel1");
+
+        label_nombre.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_nombre.setForeground(new java.awt.Color(255, 51, 51));
+        label_nombre.setText("jLabel1");
+
+        label_telefono.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_telefono.setForeground(new java.awt.Color(255, 51, 51));
+        label_telefono.setText("jLabel1");
+
+        label_correo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_correo.setForeground(new java.awt.Color(255, 51, 51));
+        label_correo.setText("jLabel1");
+
+        label_direccion.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_direccion.setForeground(new java.awt.Color(255, 51, 51));
+        label_direccion.setText("jLabel1");
+
+        label_barra_like.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_barra_like.setForeground(new java.awt.Color(255, 51, 51));
+        label_barra_like.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -246,8 +312,10 @@ public class Panel_Empleados extends javax.swing.JPanel {
                             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cedula2)
-                            .addComponent(correo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                            .addComponent(cedula)
+                            .addComponent(correo, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(label_cedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(label_correo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -255,7 +323,9 @@ public class Panel_Empleados extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nombre)
-                            .addComponent(direccion, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                            .addComponent(direccion, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(label_nombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(label_direccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -263,15 +333,8 @@ public class Panel_Empleados extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(telefono)
-                            .addComponent(genero, 0, 200, Short.MAX_VALUE)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel15)
-                        .addGap(18, 18, 18)
-                        .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(genero, 0, 200, Short.MAX_VALUE)
+                            .addComponent(label_telefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -283,7 +346,17 @@ public class Panel_Empleados extends javax.swing.JPanel {
                         .addGap(100, 100, 100)
                         .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100)
-                        .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18)
+                        .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_barra_like, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -292,12 +365,17 @@ public class Panel_Empleados extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(cedula2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_cedula)
+                    .addComponent(label_nombre)
+                    .addComponent(label_telefono))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,14 +383,20 @@ public class Panel_Empleados extends javax.swing.JPanel {
                     .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(genero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label_correo)
+                    .addComponent(label_direccion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
                     .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15)))
-                .addGap(30, 30, 30)
+                .addGap(4, 4, 4)
+                .addComponent(label_barra_like)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnguardar)
                     .addComponent(btnbuscar)
@@ -338,10 +422,10 @@ public class Panel_Empleados extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cedula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula2ActionPerformed
+    private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed
 
         nombre.requestFocus();
-    }//GEN-LAST:event_cedula2ActionPerformed
+    }//GEN-LAST:event_cedulaActionPerformed
 
     private void correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoActionPerformed
 
@@ -418,9 +502,9 @@ public class Panel_Empleados extends javax.swing.JPanel {
 try{                                        
  
     //Validar campos
-    if(cedula2.getText().length() == 0){
+    if(cedula.getText().length() == 0){
         JOptionPane.showMessageDialog(null, "DEBES INGRESAR UNA CEDULA PARA EL EMPLEADO","CAMPO VACIO",JOptionPane.ERROR_MESSAGE);
-        cedula2.requestFocus();
+        cedula.requestFocus();
         return;
     }
     
@@ -495,7 +579,7 @@ try{
     //Obtener Los Datos para Insertarlos
     
     //Cedula
-    long Cedula= Long.parseLong(cedula2.getText().trim());
+    long Cedula= Long.parseLong(cedula.getText().trim());
     
     //Nombre
     String Nombre= nombre.getText().trim();
@@ -539,7 +623,7 @@ try{
     tb.addRow(new Object []{Cedula,Nombre,Telefono,Correo,Direccion,Genero,facha} );
     
     //limpiar los campos
-    cedula2.setText("");
+    cedula.setText("");
     nombre.setText("");
     telefono.setText("");
     correo.setText("");
@@ -617,7 +701,7 @@ try{
            rs= search.executeQuery();
             
            if(rs.next()){
-               cedula2.setText(rs.getString("cedula_empleado"));
+               cedula.setText(rs.getString("cedula_empleado"));
                nombre.setText(rs.getString("nombre_empleado"));
                telefono.setText(rs.getString("telefono_empleado"));
                correo.setText(rs.getString("correo_empleado"));
@@ -656,9 +740,9 @@ try{
 
           try {
             //Validar campos
-            if(cedula2.getText().length() == 0){
+            if(cedula.getText().length() == 0){
                 JOptionPane.showMessageDialog(null, "DEBES INGRESAR UNA CEDULA PARA EL EMPLEADO","CAMPO VACIO",JOptionPane.ERROR_MESSAGE);
-                cedula2.requestFocus();
+                cedula.requestFocus();
                 return;
             }
             
@@ -733,7 +817,7 @@ try{
             //Obtener Los Datos para Insertarlos
             
             //Cedula
-            long Cedula= Long.parseLong(cedula2.getText().trim());
+            long Cedula= Long.parseLong(cedula.getText().trim());
             
             //Nombre
             String Nombre= nombre.getText().trim();
@@ -784,7 +868,7 @@ try{
             tb.addRow(new Object []{Cedula,Nombre,Telefono,Correo,Direccion,Genero,facha} );
             
             //limpiar los campos
-            cedula2.setText("");
+            cedula.setText("");
             nombre.setText("");
             telefono.setText("");
             correo.setText("");
@@ -907,6 +991,150 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR EMPLEADOS DESDE LA BASE DE 
         
     }//GEN-LAST:event_busquedaKeyTyped
 
+    private void cedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cedulaKeyReleased
+        
+          //validar tipo de dato
+          
+        String texto = cedula.getText().trim();
+        
+        //validar campo vacio
+        
+        if(texto.isEmpty()){
+            label_cedula.setForeground(Color.red);
+            label_cedula.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+            cedula.requestFocus();
+            return;
+        }
+             
+        //validar si es texto o numero
+        for (char c : texto.toCharArray()){
+            if(!Character.isDigit(c)){
+                label_cedula.setForeground(Color.red);
+                label_cedula.setText("¡SOLO DEBE INGRESAR NUMEROS!");
+                cedula.requestFocus();
+                return;
+            }
+        }
+        
+        //limpiar
+        label_cedula.setText("");      
+    }//GEN-LAST:event_cedulaKeyReleased
+
+    private void nombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyReleased
+        
+            //validar tipo de dato
+          
+        String texto = nombre.getText().trim();
+        
+        //validar campo vacio
+           if(texto.isEmpty()){
+               label_nombre.setForeground(Color.red);
+               label_nombre.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+               nombre.requestFocus();
+               return;
+           }
+        
+          
+            if(!texto.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")){
+            label_nombre.setForeground(Color.red);
+            label_nombre.setText("¡EL FORMATO NO ES CORRECTO!");
+            nombre.requestFocus();
+            return;
+        }else{
+            label_nombre.setText("");
+        }     
+    }//GEN-LAST:event_nombreKeyReleased
+
+    private void telefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyReleased
+       
+          //validar tipo de dato
+          
+        String texto = telefono.getText().trim();
+        
+        //validar campo vacio
+        
+        if(texto.isEmpty()){
+            label_telefono.setForeground(Color.red);
+            label_telefono.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+            telefono.requestFocus();
+            return;
+        }
+             
+        //validar si es texto o numero
+        for (char c : texto.toCharArray()){
+            if(!Character.isDigit(c)){
+                label_telefono.setForeground(Color.red);
+                label_telefono.setText("¡SOLO DEBE INGRESAR NUMEROS!");
+                telefono.requestFocus();
+                return;
+            }
+        }
+        
+        //limpiar
+        label_telefono.setText("");
+    }//GEN-LAST:event_telefonoKeyReleased
+
+    private void correoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_correoKeyReleased
+           
+//validar tipo de dato
+          
+        String texto = correo.getText().trim();
+        
+        //validar campo vacio
+           if(texto.isEmpty()){
+               label_correo.setForeground(Color.red);
+               label_correo.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+               correo.requestFocus();
+               return;
+           }
+           
+           //limpiar
+           label_correo.setText("");
+    }//GEN-LAST:event_correoKeyReleased
+
+    private void direccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_direccionKeyReleased
+        
+          //validar tipo de dato
+          
+        String texto = direccion.getText().trim();
+        
+        //validar campo vacio
+           if(texto.isEmpty()){
+               label_direccion.setForeground(Color.red);
+               label_direccion.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+               direccion.requestFocus();
+               return;
+           }
+           
+           //limpiar
+           label_direccion.setText("");
+    }//GEN-LAST:event_direccionKeyReleased
+
+    private void busquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busquedaKeyReleased
+        
+           //validar tipo de dato
+          
+        String texto = busqueda.getText().trim();
+        
+        //validar campo vacio
+           if(texto.isEmpty()){
+               label_barra_like.setForeground(Color.red);
+               label_barra_like.setText("");
+               busqueda.requestFocus();
+               return;
+           }
+        
+          
+            if(!texto.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")){
+            label_barra_like.setForeground(Color.red);
+            label_barra_like.setText("¡EL FORMATO NO ES CORRECTO!");
+            busqueda.requestFocus();
+            return;
+        }else{
+            label_barra_like.setText("");
+        }
+    }//GEN-LAST:event_busquedaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
@@ -915,7 +1143,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR EMPLEADOS DESDE LA BASE DE 
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnmostrar;
     private javax.swing.JTextField busqueda;
-    private javax.swing.JTextField cedula2;
+    private javax.swing.JTextField cedula;
     private javax.swing.JTextField correo;
     private javax.swing.JTextField direccion;
     private com.toedter.calendar.JDateChooser fecha;
@@ -930,6 +1158,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR EMPLEADOS DESDE LA BASE DE 
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_barra_like;
+    private javax.swing.JLabel label_cedula;
+    private javax.swing.JLabel label_correo;
+    private javax.swing.JLabel label_direccion;
+    private javax.swing.JLabel label_nombre;
+    private javax.swing.JLabel label_telefono;
     private javax.swing.JTextField nombre;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField telefono;

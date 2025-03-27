@@ -1049,9 +1049,6 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
         }else{
             label_nombre.setText("");
         }
-        
-       
-
     }//GEN-LAST:event_nombreKeyReleased
 
     private void telefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoKeyReleased

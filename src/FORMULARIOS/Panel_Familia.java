@@ -2,6 +2,7 @@
 package FORMULARIOS;
 
 import FORMULARIOS.Conexion;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,11 @@ public class Panel_Familia extends javax.swing.JPanel {
         String ids [] = {"ID_FAMILIA","NOMBRE","DESCRIPCION"};
         tb.setColumnIdentifiers(ids);
         tabla.setModel(tb);
+        
+        label_ID.setText("");
+        label_nombre.setText("");
+        label_descripcion.setText("");
+        label_barra_like.setText("");
         
     }
 
@@ -48,6 +54,10 @@ public class Panel_Familia extends javax.swing.JPanel {
         tabla = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
+        label_ID = new javax.swing.JLabel();
+        label_nombre = new javax.swing.JLabel();
+        label_descripcion = new javax.swing.JLabel();
+        label_barra_like = new javax.swing.JLabel();
 
         jPanel4.setBackground(new java.awt.Color(228, 242, 247));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 0, 0)), "FAMILIA DE LOS PRODUCTOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 36), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -69,6 +79,11 @@ public class Panel_Familia extends javax.swing.JPanel {
                 idActionPerformed(evt);
             }
         });
+        id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                idKeyReleased(evt);
+            }
+        });
 
         nombre.setBackground(new java.awt.Color(209, 235, 247));
         nombre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -77,6 +92,11 @@ public class Panel_Familia extends javax.swing.JPanel {
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
+            }
+        });
+        nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nombreKeyReleased(evt);
             }
         });
 
@@ -89,6 +109,9 @@ public class Panel_Familia extends javax.swing.JPanel {
         busqueda.setForeground(new java.awt.Color(0, 0, 0));
         busqueda.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
         busqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                busquedaKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 busquedaKeyTyped(evt);
             }
@@ -167,7 +190,28 @@ public class Panel_Familia extends javax.swing.JPanel {
         descripcion.setForeground(new java.awt.Color(0, 0, 0));
         descripcion.setRows(5);
         descripcion.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        descripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                descripcionKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(descripcion);
+
+        label_ID.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_ID.setForeground(new java.awt.Color(255, 51, 51));
+        label_ID.setText("jLabel1");
+
+        label_nombre.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_nombre.setForeground(new java.awt.Color(255, 51, 51));
+        label_nombre.setText("jLabel1");
+
+        label_descripcion.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_descripcion.setForeground(new java.awt.Color(255, 51, 51));
+        label_descripcion.setText("jLabel1");
+
+        label_barra_like.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_barra_like.setForeground(new java.awt.Color(255, 51, 51));
+        label_barra_like.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -176,24 +220,6 @@ public class Panel_Familia extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel9))
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1164, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,7 +234,41 @@ public class Panel_Familia extends javax.swing.JPanel {
                                 .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(100, 100, 100)
                                 .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel9))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(label_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel6))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label_barra_like, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(label_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,12 +282,20 @@ public class Panel_Familia extends javax.swing.JPanel {
                             .addComponent(jLabel5)
                             .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(25, 25, 25)
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label_ID)
+                            .addComponent(label_nombre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label_barra_like))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label_descripcion)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnguardar)
                     .addComponent(btnbuscar)
@@ -690,6 +758,103 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR FAMILIAS DESDE LA BASE DE D
         
     }//GEN-LAST:event_busquedaKeyTyped
 
+    private void idKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_idKeyReleased
+        
+          //validar tipo de dato
+          
+        String texto = id.getText().trim();
+        
+        //validar campo vacio
+        
+        if(texto.isEmpty()){
+            label_ID.setForeground(Color.red);
+            label_ID.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+            id.requestFocus();
+            return;
+        }
+             
+        //validar si es texto o numero
+        for (char c : texto.toCharArray()){
+            if(!Character.isDigit(c)){
+                label_ID.setForeground(Color.red);
+                label_ID.setText("¡SOLO DEBE INGRESAR NUMEROS!");
+                id.requestFocus();
+                return;
+            }
+        }
+        
+        //limpiar
+        label_ID.setText("");
+    }//GEN-LAST:event_idKeyReleased
+
+    private void nombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreKeyReleased
+        
+          //validar tipo de dato
+          
+        String texto = nombre.getText().trim();
+        
+        //validar campo vacio
+           if(texto.isEmpty()){
+               label_nombre.setForeground(Color.red);
+               label_nombre.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+               nombre.requestFocus();
+               return;
+           }
+        
+          
+            if(!texto.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")){
+            label_nombre.setForeground(Color.red);
+            label_nombre.setText("¡EL FORMATO NO ES CORRECTO!");
+            nombre.requestFocus();
+            return;
+        }else{
+            label_nombre.setText("");
+        }
+    }//GEN-LAST:event_nombreKeyReleased
+
+    private void descripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descripcionKeyReleased
+        
+         //validar tipo de dato
+          
+        String texto = descripcion.getText().trim();
+        
+        //validar campo vacio
+           if(texto.isEmpty()){
+               label_descripcion.setForeground(Color.red);
+               label_descripcion.setText("¡EL CAMPO NO PUEDE ESTAR VACIO!");
+               descripcion.requestFocus();
+               return;
+           }
+           
+           //limpiar
+           label_descripcion.setText("");
+    }//GEN-LAST:event_descripcionKeyReleased
+
+    private void busquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_busquedaKeyReleased
+       
+         //validar tipo de dato
+          
+        String texto = busqueda.getText().trim();
+        
+        //validar campo vacio
+           if(texto.isEmpty()){
+               label_barra_like.setForeground(Color.red);
+               label_barra_like.setText("");
+               busqueda.requestFocus();
+               return;
+           }
+        
+          
+            if(!texto.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")){
+            label_barra_like.setForeground(Color.red);
+            label_barra_like.setText("¡EL FORMATO NO ES CORRECTO!");
+            busqueda.requestFocus();
+            return;
+        }else{
+            label_barra_like.setText("");
+        }
+    }//GEN-LAST:event_busquedaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
@@ -707,6 +872,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR FAMILIAS DESDE LA BASE DE D
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel label_ID;
+    private javax.swing.JLabel label_barra_like;
+    private javax.swing.JLabel label_descripcion;
+    private javax.swing.JLabel label_nombre;
     private javax.swing.JTextField nombre;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
