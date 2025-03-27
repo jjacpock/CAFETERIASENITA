@@ -110,7 +110,8 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         btnempleados.setBackground(new java.awt.Color(121, 182, 201));
         btnempleados.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnempleados.setForeground(new java.awt.Color(0, 0, 0));
-        btnempleados.setText("EMPLEADOS");
+        btnempleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/cafe.png"))); // NOI18N
+        btnempleados.setContentAreaFilled(false);
         btnempleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnempleadosActionPerformed(evt);
@@ -121,6 +122,8 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         btnclientes.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnclientes.setForeground(new java.awt.Color(0, 0, 0));
         btnclientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/cliente.png"))); // NOI18N
+        btnclientes.setToolTipText("AGREGAR CLIENTE");
+        btnclientes.setContentAreaFilled(false);
         btnclientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnclientesActionPerformed(evt);
@@ -172,8 +175,6 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnproducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnempleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnclientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnfamilia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnmenuLayout.createSequentialGroup()
                         .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -182,17 +183,23 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
                             .addComponent(btnventas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(pnmenuLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnempleados)
+                    .addComponent(btnclientes))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnmenuLayout.setVerticalGroup(
             pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnmenuLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(btnclientes)
                 .addGap(18, 18, 18)
                 .addComponent(btnempleados)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(btnfamilia)
                 .addGap(18, 18, 18)
                 .addComponent(btnproducto)
