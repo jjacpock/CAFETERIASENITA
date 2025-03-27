@@ -275,29 +275,29 @@ public class Panel_Empleados extends javax.swing.JPanel {
         genero.setForeground(new java.awt.Color(0, 0, 0));
         genero.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
 
-        label_cedula.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_cedula.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         label_cedula.setForeground(new java.awt.Color(255, 51, 51));
-        label_cedula.setText("jLabel1");
+        label_cedula.setText("Validacion");
 
-        label_nombre.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_nombre.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         label_nombre.setForeground(new java.awt.Color(255, 51, 51));
-        label_nombre.setText("jLabel1");
+        label_nombre.setText("Validacion");
 
-        label_telefono.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_telefono.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         label_telefono.setForeground(new java.awt.Color(255, 51, 51));
-        label_telefono.setText("jLabel1");
+        label_telefono.setText("Validacion");
 
-        label_correo.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_correo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         label_correo.setForeground(new java.awt.Color(255, 51, 51));
-        label_correo.setText("jLabel1");
+        label_correo.setText("Validacion");
 
-        label_direccion.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_direccion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         label_direccion.setForeground(new java.awt.Color(255, 51, 51));
-        label_direccion.setText("jLabel1");
+        label_direccion.setText("Validacion");
 
-        label_barra_like.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        label_barra_like.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         label_barra_like.setForeground(new java.awt.Color(255, 51, 51));
-        label_barra_like.setText("jLabel1");
+        label_barra_like.setText("Validacion");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -362,7 +362,7 @@ public class Panel_Empleados extends javax.swing.JPanel {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,12 +370,12 @@ public class Panel_Empleados extends javax.swing.JPanel {
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_cedula)
                     .addComponent(label_nombre)
                     .addComponent(label_telefono))
-                .addGap(5, 5, 5)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -383,29 +383,29 @@ public class Panel_Empleados extends javax.swing.JPanel {
                     .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(genero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_correo)
                     .addComponent(label_direccion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
-                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel15)))
-                .addGap(4, 4, 4)
+                .addGap(15, 15, 15)
                 .addComponent(label_barra_like)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnguardar)
                     .addComponent(btnbuscar)
                     .addComponent(btneditar)
                     .addComponent(btneliminar)
                     .addComponent(btnmostrar))
-                .addGap(31, 31, 31)
+                .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
