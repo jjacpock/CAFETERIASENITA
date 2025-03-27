@@ -318,7 +318,6 @@ public class Panel_Producto extends javax.swing.JPanel {
         descripcion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         descripcion.setForeground(new java.awt.Color(0, 0, 0));
         descripcion.setRows(5);
-        descripcion.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         descripcion.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
         descripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {

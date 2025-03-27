@@ -99,10 +99,10 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        ancla.setBackground(new java.awt.Color(209, 235, 247));
+        ancla.setBackground(new java.awt.Color(112, 138, 147));
         ancla.setPreferredSize(new java.awt.Dimension(1000, 1000));
 
-        pnmenu.setBackground(new java.awt.Color(242, 248, 251));
+        pnmenu.setBackground(new java.awt.Color(112, 138, 147));
         pnmenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)), "MENÚ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Showcard Gothic", 1, 36), new java.awt.Color(0, 0, 0))); // NOI18N
 
         btnempleados.setBackground(new java.awt.Color(121, 182, 201));
@@ -144,6 +144,7 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         btnproducto.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         btnproducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/menu-de-cafe.png"))); // NOI18N
         btnproducto.setToolTipText("AÑADIR UN PRODUCTO");
+        btnproducto.setContentAreaFilled(false);
         btnproducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnproductoActionPerformed(evt);
@@ -198,24 +199,25 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
             pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnmenuLayout.createSequentialGroup()
                 .addComponent(btnclientes)
-                .addGap(30, 30, 30)
+                .addGap(15, 15, 15)
                 .addComponent(btnempleados)
-                .addGap(30, 30, 30)
+                .addGap(15, 15, 15)
                 .addComponent(btnfamilia)
-                .addGap(30, 30, 30)
+                .addGap(15, 15, 15)
                 .addComponent(btnproducto)
-                .addGap(30, 30, 30)
+                .addGap(15, 15, 15)
                 .addComponent(btnnutrientes)
-                .addGap(30, 30, 30)
+                .addGap(15, 15, 15)
                 .addComponent(jButton1)
-                .addGap(30, 30, 30)
+                .addGap(15, 15, 15)
                 .addComponent(btnventas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         menu.setBackground(new java.awt.Color(209, 235, 247));
         menu.setForeground(new java.awt.Color(209, 235, 247));
         menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/granos-de-cafe (2).png"))); // NOI18N
+        menu.setContentAreaFilled(false);
         menu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuActionPerformed(evt);
@@ -246,39 +248,41 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
             anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(anclaLayout.createSequentialGroup()
                 .addComponent(pnmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(anclaLayout.createSequentialGroup()
-                        .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(387, 387, 387)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(14, 14, 14)
+                        .addComponent(menu)
+                        .addGap(399, 399, 399)
+                        .addComponent(jLabel3))
+                    .addGroup(anclaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         anclaLayout.setVerticalGroup(
             anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(anclaLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(menu)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(anclaLayout.createSequentialGroup()
-                .addComponent(pnmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(anclaLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(menu))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ancla, javax.swing.GroupLayout.DEFAULT_SIZE, 1536, Short.MAX_VALUE)
+            .addComponent(ancla, javax.swing.GroupLayout.DEFAULT_SIZE, 1515, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ancla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+            .addComponent(ancla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
         );
 
         pack();
