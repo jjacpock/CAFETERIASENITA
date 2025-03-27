@@ -356,7 +356,6 @@ public class Panel_Producto extends javax.swing.JPanel {
         a_vector.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         a_vector.setForeground(new java.awt.Color(0, 0, 0));
         a_vector.setRows(5);
-        a_vector.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         a_vector.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
         jScrollPane3.setViewportView(a_vector);
 

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package FORMULARIOS;
 
 import java.awt.HeadlessException;
@@ -16,17 +13,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 
-/**
- *
- * @author Usuario
- */
+
 public class Panel_Ventas extends javax.swing.JPanel {
     
     DefaultTableModel tb = new DefaultTableModel();
 
-    /**
-     * Creates new form Panel_Ventas
-     */
+
     public Panel_Ventas() {
         initComponents();
         
