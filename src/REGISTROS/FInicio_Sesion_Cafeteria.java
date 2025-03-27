@@ -120,7 +120,7 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         btnclientes.setBackground(new java.awt.Color(121, 182, 201));
         btnclientes.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnclientes.setForeground(new java.awt.Color(0, 0, 0));
-        btnclientes.setText("CLIENTES");
+        btnclientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/cliente.png"))); // NOI18N
         btnclientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnclientesActionPerformed(evt);
