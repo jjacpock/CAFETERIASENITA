@@ -9,7 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
 
 /**
  *
@@ -172,6 +174,11 @@ public class Panel_Ventas extends javax.swing.JPanel {
         btnmostrar.setForeground(new java.awt.Color(0, 0, 0));
         btnmostrar.setText("MOSTRAR");
         btnmostrar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        btnmostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmostrarActionPerformed(evt);
+            }
+        });
 
         tabla.setBackground(new java.awt.Color(209, 235, 247));
         tabla.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
@@ -354,9 +361,24 @@ public class Panel_Ventas extends javax.swing.JPanel {
             //query o consulta
             String query = "Insert into ventas values("+Id+", '"+facha+"', '"+DatosCliente+"', '"+DatosEmpleado+"', '"+FormaPago+"',"+TotalVenta+")";
             
+            System.out.println(query);
+            con.actualizar(query);
+            
+            JOptionPane.showMessageDialog(null, "VENTA REALIZADA CON EXITO");
+            
+            //Cerrar conexión
+            con.cerrar();
+                     
+            //Mostrar Los Datos En La Tabla
+            tb.addRow(new Object []{Id, facha, DatosCliente, DatosEmpleado, FormaPago, TotalVenta} );
+            
+            
+            //Limpiar Los Campos
+            totalventa.setText("");
             
             
             con.ConexionPostgres();
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -366,8 +388,76 @@ public class Panel_Ventas extends javax.swing.JPanel {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //Listar Desde La BD
+        tb.setRowCount(0);
+        
+        //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
             
+            try{
+                
+                con.ConexionPostgres();
+                
+                String seleccionar = "SELECT * FROM ventas";
+                
+                ResultSet rs = con.consultar(seleccionar);
+                
+                while(rs.next()){
+                    
+                    tb.addRow(new Object[]{
+                    
+                    rs.getLong("id_venta"),
+                    rs.getString("fecha_venta"),
+                    rs.getString("datoscliente_venta"),
+                    rs.getString("datosempleado_venta"),
+                    rs.getString("formapago_venta"),
+                    rs.getDouble("total_venta")
+                            
+                    });
+                }                            
+            }catch (Exception ex) {
+ex.printStackTrace();
+
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE DATOS");
+}          
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
+       
+         //Listar Desde La BD
+        tb.setRowCount(0);
+        
+        //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            try{
+                
+                con.ConexionPostgres();
+                
+                String seleccionar = "SELECT * FROM ventas";
+                
+                ResultSet rs = con.consultar(seleccionar);
+                
+                while(rs.next()){
+                    
+                    tb.addRow(new Object[]{
+                    
+                    rs.getLong("id_venta"),
+                    rs.getString("fecha_venta"),
+                    rs.getString("datoscliente_venta"),
+                    rs.getString("datosempleado_venta"),
+                    rs.getString("formapago_venta"),
+                    rs.getDouble("total_venta")
+                            
+                    });
+                }                            
+            }catch (Exception ex) {
+ex.printStackTrace();
+
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE DATOS");
+}
+    }//GEN-LAST:event_btnmostrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
