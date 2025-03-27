@@ -33,6 +33,62 @@ public class Panel_Ventas extends javax.swing.JPanel {
         String ids [] = {"ID_FAMILIA","NOMBRE","DESCRIPCION"};
         tb.setColumnIdentifiers(ids);
         tabla.setModel(tb);
+        
+        
+        
+        //llamar familias
+        
+         Connection conect = null;
+              PreparedStatement loguin = null;
+              ResultSet rs = null;
+        
+        
+         try {
+
+              Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+              
+              con.ConexionPostgres();
+              
+               conect=con.getConnection();
+           
+            String query = ("Select * From familias order by id_familia ASC");
+            
+             loguin = conect.prepareStatement(query);
+             
+             rs = loguin.executeQuery();
+             
+              while(rs.next()){
+              
+                  Long  Familia_ID = rs.getLong("id_familia");
+                  String Familia_N = rs.getString("nombre_familia");
+                  System.out.println(Familia_ID+" - "+Familia_N);
+                  
+                  familia.addItem(Familia_N);
+              
+              }
+              
+              
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (InstantiationException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (IllegalAccessException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } 
+              finally{
+           try{
+               if(rs != null) rs.close();
+               if(loguin != null)loguin.close();
+               if(conect != null)conect.close();
+           }
+           catch(SQLException e){
+               e.printStackTrace();
+           }
+       }
+        
+        
     }
 
     
