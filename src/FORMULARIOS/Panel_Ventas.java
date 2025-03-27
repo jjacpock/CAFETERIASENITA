@@ -657,7 +657,8 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                     +"fecha_venta= '"+FechaVenta+" ', "
                     +"datoscliente_venta= '"+DatosCliente+" ', "
                     +"datosempleado_venta= '"+DatosEmpleado+" ', "
-                    +"formapago_venta= '"+FormaPago+" ' "
+                    +"formapago_venta= '"+FormaPago+" ' ,"
+                    +"total_venta= "+TotalVenta
                     +"WHERE id_venta= "+Id;
             
             System.out.println(query);
