@@ -2,6 +2,7 @@
 package REGISTROS;
 
 import FORMULARIOS.Panel_Clientes;
+import FORMULARIOS.Panel_Detalle_Venta;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import FORMULARIOS.Panel_Empleados;
@@ -178,6 +179,11 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         jButton1.setToolTipText("DETALLE DE VENTAS");
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnmenuLayout = new javax.swing.GroupLayout(pnmenu);
         pnmenu.setLayout(pnmenuLayout);
@@ -339,6 +345,12 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
         Panel_Ventas p = new Panel_Ventas();
         desplegar(p);
     }//GEN-LAST:event_btnventasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        Panel_Detalle_Venta p = new Panel_Detalle_Venta();
+        desplegar(p);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

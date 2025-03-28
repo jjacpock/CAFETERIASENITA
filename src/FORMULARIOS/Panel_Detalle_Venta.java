@@ -4,17 +4,87 @@
  */
 package FORMULARIOS;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
  */
 public class Panel_Detalle_Venta extends javax.swing.JPanel {
 
+     DefaultTableModel tb = new DefaultTableModel();
     /**
      * Creates new form Panel_Detalle_Venta
      */
     public Panel_Detalle_Venta() {
         initComponents();
+        
+        String ids [] = {"ID DETALLE","ID VENTA","ID PRODUCTO","CANTIDAD","PRECIO UNITARIO","DESCUENTOS","SUBTOTAL","TOTAL DETALLE"};
+        
+        tb.setColumnIdentifiers(ids);
+        tabla.setModel(tb);
+        
+        
+        //llamar producto
+        
+         Connection conect = null;
+              PreparedStatement loguin = null;
+              ResultSet rs = null;
+        
+        
+         try {
+
+              Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+              
+              con.ConexionPostgres();
+              
+               conect=con.getConnection();
+           
+            String query = ("Select * From productos order by id_producto ASC");
+            
+             loguin = conect.prepareStatement(query);
+             
+             rs = loguin.executeQuery();
+             
+              while(rs.next()){
+              
+                  Long  ID_PRODUCTO = rs.getLong("id_producto");
+                  String NOMBRE_PRODUCTO = rs.getString("nombre_producto");
+                  System.out.println(ID_PRODUCTO+" - "+NOMBRE_PRODUCTO);
+                  
+                  idproducto.addItem(NOMBRE_PRODUCTO);
+              
+              }
+              
+              
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (SQLException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (InstantiationException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } catch (IllegalAccessException ex) {
+              Logger.getLogger(Panel_Familia.class.getName()).log(Level.SEVERE, null, ex);
+          } 
+              finally{
+           try{
+               if(rs != null) rs.close();
+               if(loguin != null)loguin.close();
+               if(conect != null)conect.close();
+           }
+           catch(SQLException e){
+               e.printStackTrace();
+           }
+       }
     }
 
     /**
@@ -74,7 +144,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("ID_PRODUCTO:");
+        jLabel3.setText("PRODUCTO:");
 
         idproducto.setBackground(new java.awt.Color(209, 235, 247));
         idproducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -291,7 +361,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed

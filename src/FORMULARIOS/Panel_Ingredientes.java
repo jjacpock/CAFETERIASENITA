@@ -26,7 +26,7 @@ public class Panel_Ingredientes extends javax.swing.JPanel {
     public Panel_Ingredientes() {
         initComponents();
         
-        String ids [] = {"ID","NOMBRE","DESCRIPCION"};
+        String ids [] = {"ID","NOMBRE","DESCRIPCION","VALOR NUTRICIONAL"};
         tb.setColumnIdentifiers(ids);
         tabla.setModel(tb);
         
@@ -230,6 +230,11 @@ public class Panel_Ingredientes extends javax.swing.JPanel {
         infonutricional.setForeground(new java.awt.Color(0, 0, 0));
         infonutricional.setRows(5);
         infonutricional.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        infonutricional.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                infonutricionalKeyReleased(evt);
+            }
+        });
         jScrollPane4.setViewportView(infonutricional);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -433,6 +438,7 @@ public class Panel_Ingredientes extends javax.swing.JPanel {
                id.setText(rs.getString("id_ingrediente"));
                nombre.setText(rs.getString("nombre_ingrediente"));
                descripcion.setText(rs.getString("descripcion_ingrediente"));
+               infonutricional.setText(rs.getString("valornutricional_ingrediente"));
                
                JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
                
@@ -483,7 +489,8 @@ try{
             
             resultado.getLong("id_ingrediente"),
             resultado.getString("nombre_ingrediente"),
-            resultado.getString("descripcion_ingrediente")
+            resultado.getString("descripcion_ingrediente"),
+            resultado.getString("valornutricional_ingrediente")
                
         });
         
@@ -551,6 +558,12 @@ try{
                 descripcion.requestFocus();
                 return;
             }
+            
+            if(infonutricional.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "DEBES INGRESAR EL VALOR NUTRICIONAL DEL INGREDIENTE","CAMPO VACIO",JOptionPane.ERROR_MESSAGE);
+                infonutricional.requestFocus();
+                return;
+            }
 
             
             //Asignar orden de los datos en la tabla
@@ -568,11 +581,9 @@ try{
                 //Asignar Dato en la Tabla (Descripcion)
                 String Descripcion_ADT = tb.getValueAt(i, 2).toString();
                 
+                //Asignar Dato en la Tabla (Valor Nutricional)
+                String ValorNutricional_ADT = tb.getValueAt(i, 3).toString();
                 
-                System.out.println("Guardando datos: "+
-                        "\n"+"ID: "+ID_ADT+
-                        "\n"+"Nombre: "+Nombre_ADT+
-                        "\n"+"Descripción: "+Descripcion_ADT);
 
             }
             
@@ -587,6 +598,9 @@ try{
             //Descripción
             String Descripcion= descripcion.getText().trim();
             
+            //Valor Nutricional
+            String Valor_Nutricional= infonutricional.getText().trim();
+            
 ;
             
             //Establecer Conexión con la base de datos
@@ -595,7 +609,7 @@ try{
             con.ConexionPostgres();
             
             //query o consulta
-            String query = "insert into ingredientes values("+ID+" , '"+Nombre +" ', '"+Descripcion+" ' )";
+            String query = "insert into ingredientes values("+ID+" , '"+Nombre +"', '"+Descripcion+"', '"+Valor_Nutricional+"' )";
             
             System.out.println(query);
             con.actualizar(query);
@@ -606,22 +620,23 @@ try{
             con.cerrar();
                      
             //Mostrar Los Datos En La Tabla
-            tb.addRow(new Object []{ID,Nombre,Descripcion} );
+            tb.addRow(new Object []{ID,Nombre,Descripcion, Valor_Nutricional} );
             
             //limpiar los campos
             id.setText("");
             nombre.setText("");
             descripcion.setText("");
+            infonutricional.setText("");
 
             
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Panel_Ingredientes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Panel_Ingredientes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Panel_Ingredientes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Panel_Ingredientes.class.getName()).log(Level.SEVERE, null, ex);
         }
         
    //Listar Desde La BD
@@ -643,7 +658,8 @@ tb.addRow(new Object[]{
 
 resultado.getLong("id_ingrediente"),
 resultado.getString("nombre_ingrediente"),
-resultado.getString("descripcion_ingrediente")
+resultado.getString("descripcion_ingrediente"),
+resultado.getString("valornutricional_ingrediente")
 });
 
 }     } catch (Exception ex) {
@@ -674,6 +690,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE 
                 descripcion.requestFocus();
                 return;
             }
+            
+            if(infonutricional.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "DEBES INGRESAR EL VALOR NUTRICIONAL DEL INGREDIENTE","CAMPO VACIO",JOptionPane.ERROR_MESSAGE);
+                infonutricional.requestFocus();
+                return;
+            }
 
             
             //Asignar orden de los datos en la tabla
@@ -690,6 +712,9 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE 
                 
                 //Asignar Dato en la Tabla (Descripcion)
                 String Descripcion_ADT = tb.getValueAt(i, 2).toString();
+                
+                 //Asignar Dato en la Tabla (Valor Nutricional)
+                String ValorNutricional_ADT = tb.getValueAt(i, 3).toString();
                 
                 
                 System.out.println("Guardando datos: "+
@@ -710,6 +735,9 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE 
             //Descripción
             String Descripcion= descripcion.getText().trim();
             
+            //Valor Nutricional
+            String Valor_Nutricional= infonutricional.getText().trim();
+            
 ;
             
             //Establecer Conexión con la base de datos
@@ -720,7 +748,8 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE 
             //query o consulta
             String query = "update ingredientes set"
                     +" nombre_ingrediente= '"+Nombre+"', "
-                    +" descripcion_ingrediente= '"+Descripcion
+                    +" descripcion_ingrediente= '"+Descripcion+"',"
+                    +" valornutricional_ingrediente= '"+Valor_Nutricional
                     +"' where id_ingrediente= "+ID;
             
             System.out.println(query);
@@ -738,6 +767,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE 
             id.setText("");
             nombre.setText("");
             descripcion.setText("");
+            infonutricional.setText("");
 
             
         } catch (ClassNotFoundException ex) {
@@ -769,7 +799,8 @@ tb.addRow(new Object[]{
 
 resultado.getLong("id_ingrediente"),
 resultado.getString("nombre_ingrediente"),
-resultado.getString("descripcion_ingrediente")
+resultado.getString("descripcion_ingrediente"),
+resultado.getString("valornutricional_ingrediente")
 });
 
 }     } catch (Exception ex) {
@@ -834,6 +865,9 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE 
     }//GEN-LAST:event_nombreKeyReleased
 
     private void descripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descripcionKeyReleased
+
+         descripcion.setLineWrap(true); // Habilitar el salto de línea automático
+        descripcion.setWrapStyleWord(true); // Asegurarse de que el salto de línea ocurra en las palabras      
         
          //validar tipo de dato
           
@@ -881,6 +915,13 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE 
         nombre.requestFocus();
         
     }//GEN-LAST:event_idActionPerformed
+
+    private void infonutricionalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_infonutricionalKeyReleased
+       
+        
+        infonutricional.setLineWrap(true); // Habilitar el salto de línea automático
+        infonutricional.setWrapStyleWord(true); // Asegurarse de que el salto de línea ocurra en las palabras
+    }//GEN-LAST:event_infonutricionalKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

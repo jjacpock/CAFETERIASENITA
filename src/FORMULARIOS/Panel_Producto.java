@@ -182,8 +182,8 @@ public class Panel_Producto extends javax.swing.JPanel {
         label_ID = new javax.swing.JLabel();
         label_nombre = new javax.swing.JLabel();
         label_precio = new javax.swing.JLabel();
-        label_descripcion = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        label_descripcion = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(228, 242, 247));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 0, 0)), "INGRESAR PRODUCTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 36), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -357,6 +357,11 @@ public class Panel_Producto extends javax.swing.JPanel {
         a_vector.setForeground(new java.awt.Color(0, 0, 0));
         a_vector.setRows(5);
         a_vector.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        a_vector.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                a_vectorKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(a_vector);
 
         label_ID.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -371,13 +376,13 @@ public class Panel_Producto extends javax.swing.JPanel {
         label_precio.setForeground(new java.awt.Color(255, 51, 51));
         label_precio.setText("Validacion");
 
-        label_descripcion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        label_descripcion.setForeground(new java.awt.Color(255, 51, 51));
-        label_descripcion.setText("Validacion");
-
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("INGREDIENTES:");
+
+        label_descripcion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        label_descripcion.setForeground(new java.awt.Color(255, 51, 51));
+        label_descripcion.setText("Validacion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -434,15 +439,17 @@ public class Panel_Producto extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addGap(40, 40, 40)
                         .addComponent(familia, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(label_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1320, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(607, Short.MAX_VALUE)
+                    .addComponent(label_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(447, 447, 447)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -477,8 +484,6 @@ public class Panel_Producto extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
-                        .addGap(10, 10, 10)
-                        .addComponent(label_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnguardar)
@@ -490,6 +495,11 @@ public class Panel_Producto extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(171, 171, 171)
+                    .addComponent(label_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(444, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -854,11 +864,11 @@ for(int i = 0; i < ADT; i++) {
             
             //query o consulta
             String query = "update productos set "
-                    + "nombre_producto= '"+Nombre+" ', "
-                    + "familia_producto= '"+Familia+" ', "
+                    + "nombre_producto= '"+Nombre+"', "
+                    + "familia_producto= '"+Familia+"', "
                     + "precio_producto= "+Precio+" , "
-                    + "descripcion_producto= '"+Descripcion+" ', "
-                    + "ingrediente_producto= '"+Ingredientes+" ' "
+                    + "descripcion_producto= '"+Descripcion+"', "
+                    + "ingrediente_producto= '"+Ingredientes+"' "
                     +" WHERE id_producto= "+IDproducto;
             
             System.out.println(query);
@@ -1120,7 +1130,13 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
     }//GEN-LAST:event_precioKeyReleased
 
     private void descripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descripcionKeyReleased
-             
+
+        
+        descripcion.setLineWrap(true); // Habilitar el salto de línea automático
+        descripcion.setWrapStyleWord(true); // Asegurarse de que el salto de línea ocurra en las palabras
+
+        
+        
          //validar tipo de dato
           
         String texto = descripcion.getText().trim();
@@ -1138,6 +1154,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
            
            
     }//GEN-LAST:event_descripcionKeyReleased
+
+    private void a_vectorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_a_vectorKeyReleased
+
+    }//GEN-LAST:event_a_vectorKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

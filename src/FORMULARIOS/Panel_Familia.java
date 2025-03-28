@@ -397,7 +397,7 @@ public class Panel_Familia extends javax.swing.JPanel {
             con.ConexionPostgres();
             
             //query o consulta
-            String query = "insert into familias values("+ID+" , '"+Nombre +" ', '"+Descripcion+" ' )";
+            String query = "insert into familias values("+ID+" , '"+Nombre +"', '"+Descripcion+"' )";
             
             System.out.println(query);
             con.actualizar(query);
@@ -816,6 +816,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR FAMILIAS DESDE LA BASE DE D
     }//GEN-LAST:event_nombreKeyReleased
 
     private void descripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descripcionKeyReleased
+
+        descripcion.setLineWrap(true); // Habilitar el salto de línea automático
+        descripcion.setWrapStyleWord(true); // Asegurarse de que el salto de línea ocurra en las palabras
+
         
          //validar tipo de dato
           

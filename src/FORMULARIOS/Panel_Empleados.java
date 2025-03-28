@@ -607,7 +607,7 @@ try{
     con.ConexionPostgres();
     
     //query o consulta
-    String query = "insert into empleados values("+ Cedula +" , '"+Nombre +" ',  "+Telefono + " , '"+Correo +" ', '"+Direccion + " ', '"+Genero+ " ' , '"+facha + " ' )";
+    String query = "insert into empleados values("+ Cedula +" , '"+Nombre +"',  "+Telefono + " , '"+Correo +"', '"+Direccion + "', '"+Genero+ "' , '"+facha + "' )";
     
     System.out.println(query);
     con.actualizar(query);
@@ -705,6 +705,7 @@ try{
                correo.setText(rs.getString("correo_empleado"));
                direccion.setText(rs.getString("direccion_empleado"));
                fecha.setDate(rs.getDate("fechanacimiento_empleado"));
+               genero.setSelectedItem(rs.getString("genero_empleado"));
                
                
                JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
@@ -846,13 +847,13 @@ try{
             
             //query o consulta
                        String query_update = "update empleados set "
-                   + "nombre_empleado= '"+Nombre+" ', "
+                   + "nombre_empleado= '"+Nombre+"', "
                    + "telefono_empleado="+Telefono+" , "
-                   + "correo_empleado= '"+Correo+" ', "
-                   + "direccion_empleado= '"+Direccion+" ', "
-                   + "genero_empleado= '"+Genero+" ', "
+                   + "correo_empleado= '"+Correo+"', "
+                   + "direccion_empleado= '"+Direccion+"', "
+                   + "genero_empleado= '"+Genero+"', "
                    + "fechanacimiento_empleado= ' "+facha
-                   +" ' where cedula_empleado= "+Cedula;
+                   +"' where cedula_empleado= "+Cedula;
             
             System.out.println(query_update);
             con.actualizar(query_update);

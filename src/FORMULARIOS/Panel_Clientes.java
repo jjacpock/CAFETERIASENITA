@@ -570,7 +570,7 @@ public class Panel_Clientes extends javax.swing.JPanel {
             con.ConexionPostgres();
             
             //query o consulta
-            String query = "insert into clientes values("+ Cedula +" , '"+Nombre +" ',  "+Telefono + " , '"+Correo +" ', '"+Direccion + " ', '"+Genero+ " ' , '"+facha + " ' )";
+            String query = "insert into clientes values("+ Cedula +" , '"+Nombre +"',  "+Telefono + " , '"+Correo +"', '"+Direccion + "', '"+Genero+ "' , '"+facha + "' )";
             
             System.out.println(query);
             con.actualizar(query);
@@ -836,12 +836,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
             
             //query o consulta
                        String query_update = "update clientes set "
-                   + "nombre_cliente= '"+Nombre+" ', "
+                   + "nombre_cliente= '"+Nombre+"', "
                    + "telefono_cliente="+Telefono+" , "
-                   + "correo_cliente= '"+Correo+" ', "
-                   + "direccion_cliente= '"+Direccion+" ', "
-                   + "genero_cliente= '"+Genero+" ', "
-                   + "fechanacimiento_cliente= ' "+facha
+                   + "correo_cliente= '"+Correo+"', "
+                   + "direccion_cliente= '"+Direccion+"', "
+                   + "genero_cliente= '"+Genero+"', "
+                   + "fechanacimiento_cliente=' "+facha
                    +" ' where cedula_cliente= "+Cedula;
             
             System.out.println(query_update);
@@ -938,6 +938,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                correo.setText(rs.getString("correo_cliente"));
                direccion.setText(rs.getString("direccion_cliente"));
                fecha.setDate(rs.getDate("fechanacimiento_cliente"));
+               genero.setSelectedItem(rs.getString("genero_cliente"));
                
                
                JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
