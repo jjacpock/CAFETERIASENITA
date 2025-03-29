@@ -127,8 +127,6 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         descuentos = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla2 = new javax.swing.JTable();
@@ -255,14 +253,6 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
             }
         });
 
-        jTextArea1.setBackground(new java.awt.Color(209, 235, 247));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)), "PRODUCTOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 14), new java.awt.Color(0, 0, 0))); // NOI18N
-        jScrollPane2.setViewportView(jTextArea1);
-
         jButton1.setBackground(new java.awt.Color(112, 138, 147));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -288,36 +278,33 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(20, 20, 20)
-                                .addComponent(iddetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel2)
-                                .addGap(20, 20, 20)
-                                .addComponent(idventa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel3)
-                                .addGap(20, 20, 20)
-                                .addComponent(idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(descuentos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(totaldetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
+                        .addGap(20, 20, 20)
+                        .addComponent(iddetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)
+                        .addGap(20, 20, 20)
+                        .addComponent(idventa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3)
+                        .addGap(20, 20, 20)
+                        .addComponent(idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(286, 286, 286))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(descuentos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(totaldetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 446, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,26 +327,23 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(iddetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(idventa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descuentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(totaldetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(iddetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(idventa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(subtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descuentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(totaldetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -407,6 +391,10 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+
+        
+        
         double subtotal_1= 0.0;
         
          //Declarar variables
@@ -440,12 +428,12 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                  
                   //pedir las unidades a comprar
                   
-                  double unidades = Double.parseDouble(JOptionPane.showInputDialog(null,"Teniendo en cuenta que el valor unitario del producto es de $"+valorunitario+"\n"+"¿Cuantas unidades desea adquirir?","Unidades solicitadas",JOptionPane.INFORMATION_MESSAGE));
+                  double unidades = Double.parseDouble(JOptionPane.showInputDialog(null,"Teniendo en cuenta que el valor unitario del producto es de $"+formato.format(valorunitario)+"\n"+"¿Cuantas unidades desea adquirir?","Unidades solicitadas",JOptionPane.INFORMATION_MESSAGE));
                   
                   double unidadesXvalorunitario = unidades*valorunitario;
                   
           
-          tb2.addRow(new  Object[]{id_producto,producto,valorunitario,unidades,unidadesXvalorunitario});
+          tb2.addRow(new  Object[]{id_producto,producto,formato.format(valorunitario),unidades,formato.format(unidadesXvalorunitario)});
                  
           
             double suma = 0.0;
@@ -454,20 +442,22 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                for( int i = 0; i<tabla2.getRowCount(); i++){
             DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
  
-            String fila = modelo.getValueAt(i, 4).toString();
+            String fila = modelo.getValueAt(i, 4).toString().replace(",", "");
             
             suma+= Double.parseDouble(fila);
             
                   System.out.println(fila);                 
 }
                System.out.println(suma);
+               
+               
 
-               subtotal.setText(suma+"");
+               subtotal.setText(formato.format(suma)+"");
                
                               for( int i = 0; i<tabla2.getRowCount(); i++){
             DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
  
-            String fila = modelo.getValueAt(i, 3).toString();
+            String fila = modelo.getValueAt(i, 3).toString().replace(",","");
             
             sumaC+= Double.parseDouble(fila);
             
@@ -539,6 +529,8 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         
         String descuento_seleccionado = descuentos.getSelectedItem().toString();
         
+        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+        
         descuentos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -547,19 +539,19 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                 
                 if(descuento_seleccionado == "Descuento del 5% por 5 o mas unidades"){
                     
-                    double subt = Double.parseDouble(subtotal.getText().trim());
+                    double subt = Double.parseDouble(subtotal.getText().trim().replace(",", ""));
                     
                     double descuento5U = subt-(subt*0.05);
                     
-                    totaldetalle.setText(""+descuento5U);
+                    totaldetalle.setText(""+formato.format(descuento5U));
                     
                 }else if(descuento_seleccionado == "Descuento del 10% por 8 o mas unidades"){
                     
-                    double subt = Double.parseDouble(subtotal.getText().trim());
+                    double subt = Double.parseDouble(subtotal.getText().trim().replace(",", ""));
                     
                     double descuento8U = subt-(subt*0.10);
                     
-                    totaldetalle.setText(""+descuento8U);
+                    totaldetalle.setText(""+formato.format(descuento8U));
                 }           
             }
         });
@@ -585,9 +577,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField subtotal;
     private javax.swing.JTable tabla;
     private javax.swing.JTable tabla2;
