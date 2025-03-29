@@ -4,12 +4,16 @@
  */
 package FORMULARIOS;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class Panel_Detalle_Venta extends javax.swing.JPanel {
 
      DefaultTableModel tb = new DefaultTableModel();
+     DefaultTableModel tb2 = new DefaultTableModel();
     /**
      * Creates new form Panel_Detalle_Venta
      */
@@ -29,9 +34,12 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         initComponents();
         
         String ids [] = {"ID DETALLE","ID VENTA","ID PRODUCTO","CANTIDAD","PRECIO UNITARIO","DESCUENTOS","SUBTOTAL","TOTAL DETALLE"};
+        String ids2 [] = {"ID PRODUCTO","NOMBRE PRODUCTO","VALOR UNITARIO","CANTIDAD A COMPRAR","SUBTOTAL"};
         
         tb.setColumnIdentifiers(ids);
+        tb2.setColumnIdentifiers(ids2);
         tabla.setModel(tb);
+        tabla2.setModel(tb2);
         
         
         //llamar producto
@@ -261,6 +269,11 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         descuentos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         descuentos.setForeground(new java.awt.Color(0, 0, 0));
         descuentos.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        descuentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descuentosActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setBackground(new java.awt.Color(209, 235, 247));
         jTextArea1.setColumns(20);
@@ -275,6 +288,11 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("AÑADIR");
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         tabla2.setBackground(new java.awt.Color(209, 235, 247));
         tabla2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
@@ -345,8 +363,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(100, 100, 100)
-                                .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE))))
                 .addGap(63, 63, 63))
         );
@@ -424,6 +441,142 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnmostrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            
+         //Declarar variables
+       Connection conect = null;
+       PreparedStatement search = null;
+       ResultSet rs = null;
+        
+         try {
+             String producto = idproducto.getSelectedItem().toString().trim();
+             
+             //iniciar conexion con la BD
+             
+             Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+             
+             con.ConexionPostgres();
+             
+             conect = con.getConnection();
+             
+             String buscar_BD = ("SELECT*FROM productos WHERE nombre_producto = ?");
+             
+             search = conect.prepareStatement(buscar_BD);
+             
+             search.setString(1, producto);
+             
+             rs = search.executeQuery();
+             
+             if(rs.next()){
+                 
+                 long id_producto = rs.getLong("id_producto");
+                 double valorunitario = rs.getDouble("precio_producto");
+                 
+                  //pedir las unidades a comprar
+                  
+                  double unidades = Double.parseDouble(JOptionPane.showInputDialog(null,"Teniendo en cuenta que el valor unitario del producto es de $"+valorunitario+"\n"+"¿Cuantas unidades desea adquirir?","Unidades solicitadas",JOptionPane.INFORMATION_MESSAGE));
+                  
+                  double unidadesXvalorunitario = unidades*valorunitario;
+                  
+                  if(unidades >= 5){
+                      
+                      //crear el item a añadir
+                      String item5U = "Descuento del 5% por 5 o mas unidades";
+                      //validar si no existe el item (descuento)
+                      boolean itemExistente = false;
+                      
+                      for (int i = 0; i < descuentos.getItemCount(); i++) {
+            if (descuentos.getItemAt(i).equals(item5U)) {
+                itemExistente = true;
+                break;
+            }
+        }                    
+                      // Si no existe, agregarlo
+        if (!itemExistente) {
+            descuentos.addItem(item5U);
+            System.out.println("El ítem '" + item5U + "' fue agregado.");
+        } else {
+            System.out.println("El ítem '" + item5U + "' ya existe en el JComboBox.");
+            
+        }
+                  }
+          if (unidades >= 8){
+                      
+                      //crear el item a añadir
+                      String item5U = "Descuento del 10% por 8 o mas unidades";
+                      //validar si no existe el item (descuento)
+                      boolean itemExistente = false;
+                      
+                      for (int i = 0; i < descuentos.getItemCount(); i++) {
+            if (descuentos.getItemAt(i).equals(item5U)) {
+                itemExistente = true;
+                break;
+            }
+        }                    
+                      // Si no existe, agregarlo
+        if (!itemExistente) {
+            descuentos.addItem(item5U);
+            System.out.println("El ítem '" + item5U + "' fue agregado.");
+        } else {
+            System.out.println("El ítem '" + item5U + "' ya existe en el JComboBox.");
+            
+        }
+                                     
+                  }
+                 
+                 tb2.addRow(new  Object[]{id_producto,producto,valorunitario,unidades,unidadesXvalorunitario});
+
+                 
+                 subtotal.setText(unidadesXvalorunitario+"");
+                 
+                 
+             }
+             
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void descuentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descuentosActionPerformed
+        
+        String descuento_seleccionado = descuentos.getSelectedItem().toString();
+        
+        descuentos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String descuento_seleccionado = descuentos.getSelectedItem().toString();
+                
+                if(descuento_seleccionado == "Descuento del 5% por 5 o mas unidades"){
+                    
+                    double subt = Double.parseDouble(subtotal.getText().trim());
+                    
+                    double descuento5U = subt-(subt*0.05);
+                    
+                    totaldetalle.setText(""+descuento5U);
+                    
+                }else if(descuento_seleccionado == "Descuento del 10% por 8 o mas unidades"){
+                    
+                    double subt = Double.parseDouble(subtotal.getText().trim());
+                    
+                    double descuento8U = subt-(subt*0.10);
+                    
+                    totaldetalle.setText(""+descuento8U);
+                }           
+            }
+        });
+    }//GEN-LAST:event_descuentosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
