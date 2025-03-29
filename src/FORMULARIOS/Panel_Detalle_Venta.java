@@ -444,7 +444,40 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                   
                   double unidadesXvalorunitario = unidades*valorunitario;
                   
-                  if(unidades >= 5){
+          
+          tb2.addRow(new  Object[]{id_producto,producto,valorunitario,unidades,unidadesXvalorunitario});
+                 
+          
+            double suma = 0.0;
+              double sumaC = 0.0;
+
+               for( int i = 0; i<tabla2.getRowCount(); i++){
+            DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
+ 
+            String fila = modelo.getValueAt(i, 4).toString();
+            
+            suma+= Double.parseDouble(fila);
+            
+                  System.out.println(fila);                 
+}
+               System.out.println(suma);
+
+               subtotal.setText(suma+"");
+               
+                              for( int i = 0; i<tabla2.getRowCount(); i++){
+            DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
+ 
+            String fila = modelo.getValueAt(i, 3).toString();
+            
+            sumaC+= Double.parseDouble(fila);
+            
+                  System.out.println(fila);                 
+}
+                              
+                              System.out.println(sumaC);
+                              
+                                                      
+                   if(sumaC >= 5){
                       
                       //crear el item a añadir
                       String item5U = "Descuento del 5% por 5 o mas unidades";
@@ -466,7 +499,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
             
         }
                   }
-          if (unidades >= 8){
+          if (sumaC >= 8){
                       
                       //crear el item a añadir
                       String item5U = "Descuento del 10% por 8 o mas unidades";
@@ -486,38 +519,8 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         } else {
             System.out.println("El ítem '" + item5U + "' ya existe en el JComboBox.");
             
-        }
-                                     
-                  }
-          
-          tb2.addRow(new  Object[]{id_producto,producto,valorunitario,unidades,unidadesXvalorunitario});
-                 
-          int confirmacion;
-          
-          confirmacion = JOptionPane.showConfirmDialog(null, "Desea agregar mas productos?","",JOptionPane.INFORMATION_MESSAGE);
-          
-          if(confirmacion == JOptionPane.NO_OPTION){
-              
-              jButton1.setVisible(false);
-              
-              double suma = 0.0;
-
-               for( int i = 0; i<tabla2.getRowCount(); i++){
-            DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
- 
-            String fila = modelo.getValueAt(i, 4).toString();
-            
-            suma+= Double.parseDouble(fila);
-            
-                  System.out.println(fila);                 
-}
-               System.out.println(suma);
-
-               subtotal.setText(suma+"");
-              
-               
-              
-          }              
+        }                                    
+                  }             
              }
              
          } catch (ClassNotFoundException ex) {
