@@ -4,6 +4,7 @@
  */
 package FORMULARIOS;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
     public Panel_Detalle_Venta() {
         initComponents();
         
-        String ids [] = {"ID DETALLE","ID VENTA","ID PRODUCTO","CANTIDAD","PRECIO UNITARIO","DESCUENTOS","SUBTOTAL","TOTAL DETALLE"};
+        String ids [] = {"ID DETALLE","ID VENTA","SUBTOTAL","TOTAL DETALLE"};
         String ids2 [] = {"ID PRODUCTO","NOMBRE PRODUCTO","VALOR UNITARIO","CANTIDAD A COMPRAR","SUBTOTAL"};
         
         tb.setColumnIdentifiers(ids);
@@ -43,8 +44,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         tabla2.setModel(tb2);
         
         jButton1.setVisible(true);
-        
-        
+
          Connection conect = null;
               PreparedStatement loguin = null;
               ResultSet rs = null;              
@@ -121,7 +121,6 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         totaldetalle = new javax.swing.JTextField();
         btnguardar = new javax.swing.JButton();
         btnbuscar = new javax.swing.JButton();
-        btneditar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         btnmostrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -205,17 +204,6 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         btnbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbuscarActionPerformed(evt);
-            }
-        });
-
-        btneditar.setBackground(new java.awt.Color(112, 138, 147));
-        btneditar.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btneditar.setForeground(new java.awt.Color(0, 0, 0));
-        btneditar.setText("EDITAR");
-        btneditar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
-        btneditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneditarActionPerformed(evt);
             }
         });
 
@@ -325,23 +313,22 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(totaldetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
-                                .addComponent(jButton1)
-                                .addGap(27, 27, 27)
-                                .addComponent(btneliminartabla2)
-                                .addGap(281, 361, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(familia, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(idproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(totaldetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(jButton1)
+                                .addGap(27, 27, 27)
+                                .addComponent(btneliminartabla2)))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -349,20 +336,18 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                                 .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(121, 121, 121)
                                 .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(100, 100, 100)
-                                .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(121, 121, 121)
+                                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                                .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(100, 100, 100)
-                                .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(165, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22))))))
+                                .addGap(22, 22, 22))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(121, 121, 121)
+                                .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,14 +375,13 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btneditar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btneliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnmostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane1))
                 .addGap(29, 29, 29))
         );
 
@@ -414,23 +398,287 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-      
+        
+        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+         try {
+
+
+            //Validar Datos
+            if(iddetalle.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "Debe rellenar el campo de ID de Detalle", "Campo Vacio", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            if(idventa.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "Debe rellenar el campo de ID de Venta","Campo Vacio",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+           
+            if(subtotal.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "Debe rellenar el campo de Subtotal","Campo vacio",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+
+            
+            //Asignar orden de los datos en la tabla
+            
+            int ADT = tb.getRowCount();
+            
+            for(int i = 0; i<ADT; i++){
+                
+                //Asignar Dato en la Tabla (ID DETALLE)
+                long IDdetalle_ADT = Long.parseLong(tb.getValueAt(i, 0).toString());
+                
+                //Asignar Dato en la Tabla (ID VENTA)
+                long IDventa_ADT = Long.parseLong(tb.getValueAt(i, 1).toString());             
+                
+                //Asignar Dato en la Tabla (SUBTOTAL)
+                double Subtotal_ADT = Double.parseDouble(tb.getValueAt(i, 2).toString());
+                
+                //Asignar Dato en la Tabla (TOTAL)              
+                double Total_ADT = Double.parseDouble(tb.getValueAt(i, 3).toString());
+
+            }
+            
+            //Obtener Los Datos Para Insertarlos
+            
+            //ID de detalle
+            long Id_detalle = Long.parseLong(iddetalle.getText().trim());
+            
+            //ID de Venta
+            long id_venta = Long.parseLong(idventa.getText().trim());
+            
+           
+           //Subtotal
+           double subtotal_detalle = Double.parseDouble(subtotal.getText().replace(",",""));
+                       
+            //Total 
+            double Total_detalle = Double.parseDouble(totaldetalle.getText().replace(",", ""));
+                        
+            //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            con.ConexionPostgres();
+            //query o consulta
+            String query = "Insert into detalle_ventas values("+Id_detalle+", "+id_venta+", "+subtotal_detalle+", "+Total_detalle+"  )";
+            
+            System.out.println(query);
+            con.actualizar(query);
+            
+            JOptionPane.showMessageDialog(null, "DETALLE DE VENTA REALIZADO CON EXITO");
+            
+            //Cerrar conexión
+            con.cerrar();          
+            
+            //Mostrar Los Datos En La Tabla
+            tb.addRow(new Object []{Id_detalle,id_venta,formato.format(subtotal_detalle),formato.format(Total_detalle)} );
+                     
+            //Limpiar Los Campos
+            iddetalle.setText("");
+            idventa.setText("");
+            subtotal.setText("");
+            totaldetalle.setText("");
+            descuentos.removeAllItems();
+            
+            
+            con.ConexionPostgres();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+          //Listar Desde La BD
+        tb.setRowCount(0);
+        
+        //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            try{
+                
+                con.ConexionPostgres();
+                
+                String seleccionar = "SELECT * FROM detalle_ventas";
+                
+                ResultSet rs = con.consultar(seleccionar);
+                
+                while(rs.next()){
+                    
+                    tb.addRow(new Object[]{
+                    
+                    rs.getLong("id_detalle"),
+                    rs.getLong("idventa_detalle"),
+                    rs.getDouble("subtotal_detalle"),
+                    rs.getDouble("total_detalle")
+                            
+                    });
+                }                            
+            }catch (Exception ex) {
+ex.printStackTrace();
+
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA BASE DE DATOS");
+}
+            
+            
+           
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        // TODO add your handling code here:
+        
+        
+          //Declarar variables
+       Connection conect = null;
+       PreparedStatement search = null;
+       ResultSet rs = null;
+        
+        
+        //try catch
+          try{
+            Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+           
+           con.ConexionPostgres();
+           
+           conect=con.getConnection();
+           
+            String Mostrar = ("SELECT * FROM detalle_ventas WHERE id_detalle = ?");
+            
+              search = conect.prepareStatement(Mostrar);
+              
+              long IdBuscar = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el id para buscar", "Buscar", JOptionPane.INFORMATION_MESSAGE));
+              search.setLong(1, IdBuscar);
+              
+           rs= search.executeQuery();
+            
+           if(rs.next()){
+   
+               iddetalle.setText(rs.getString("id_detalle"));
+               idventa.setText(rs.getString("id_venta"));
+               subtotal.setText(rs.getString("subtotal_detalle"));
+               totaldetalle.setText(rs.getString("total_detalle"));
+               
+
+               
+               
+               JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
+               
+           }else{
+
+               
+               JOptionPane.showMessageDialog(null, "Registro no encontrado", "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
+           }
+       }
+       catch(NumberFormatException e){
+           JOptionPane.showMessageDialog(null, "Ingrese un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+        catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Error en la base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+       catch(HeadlessException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
+           JOptionPane.showMessageDialog(null, "Error inesperado", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+        finally{
+           try {
+               if(rs != null) rs.close();
+               if(search != null)search.close();
+               if(conect != null)conect.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+        
     }//GEN-LAST:event_btnbuscarActionPerformed
 
-    private void btneditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btneditarActionPerformed
-
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        // TODO add your handling code here:
+        
+         int confirmacion;
+        
+        int fila= tabla.getSelectedRow();
+        
+        if(fila==-1){
+            
+            JOptionPane.showMessageDialog(null, "Seleccione una fila primero","Seleccionar fila",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            
+         confirmacion= JOptionPane.showConfirmDialog(null,"¿Esta Seguro de Eliminar la linea seleccionada?","Confirmación Eliminar",JOptionPane.YES_NO_OPTION,JOptionPane.ERROR_MESSAGE);
+            if(confirmacion==JOptionPane.YES_OPTION){
+                
+                
+
+             try {
+                 String Id_venta = tabla.getValueAt(fila, 0).toString();
+                 
+                 Conexion  con= new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+                 
+                 con.ConexionPostgres();
+                 
+                 String query_delete = "DELETE FROM detalle_ventas WHERE id_detalle= ' "+Id_venta+" ' ";
+                 int FilasAfectadas = con.actualizar1(query_delete);
+                 
+                 if(FilasAfectadas > 0){
+                     JOptionPane.showMessageDialog(null, "Detalle de Venta eliminado con exíto");
+                     
+                     ((DefaultTableModel)tabla.getModel()).removeRow(fila);
+                 }
+                 else{
+                     
+                     JOptionPane.showMessageDialog(null, "No Hay dicho Detalle de Venta en la base de Datos");
+                 }
+                 con.cerrar();
+                 
+                 tb.removeRow(tabla.getSelectedRow());
+             } catch (ClassNotFoundException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (SQLException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (InstantiationException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IllegalAccessException ex) {
+                 Logger.getLogger(Panel_Clientes.class.getName()).log(Level.SEVERE, null, ex);
+             }
+                 
+            }
+        }
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
-        // TODO add your handling code here:
+DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales       
+         //Listar Desde La BD
+        tb.setRowCount(0);
+        
+        //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            try{
+                
+                con.ConexionPostgres();
+                
+                String seleccionar = "SELECT * FROM detalle_ventas";
+                
+                ResultSet rs = con.consultar(seleccionar);
+                
+                while(rs.next()){
+                    
+                    tb.addRow(new Object[]{
+                    
+                    rs.getLong("id_detalle"),
+                    rs.getLong("id_venta"),
+                    formato.format(rs.getDouble("subtotal_detalle")),
+                   formato.format( rs.getDouble("total_detalle"))
+                            
+                    });
+                }                            
+            }catch (Exception ex) {
+ex.printStackTrace();
+
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA BASE DE DATOS");
+}      
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -639,7 +887,11 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                         
                 subtotal.setText(""+formato.format(resta));
                 
+                descuentos.removeAllItems();
+                
                  tb2.removeRow(tabla2.getSelectedRow());
+                 
+                 
                 
             }
         }
@@ -706,7 +958,6 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
-    private javax.swing.JButton btneditar;
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btneliminartabla2;
     private javax.swing.JButton btnguardar;

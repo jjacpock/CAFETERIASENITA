@@ -545,6 +545,8 @@ public class Panel_Ventas extends javax.swing.JPanel {
             //Establecer Conexión con la base de datos
             Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
             
+            con.ConexionPostgres();
+            
             //query o consulta
             String query = "Insert into ventas values("+Id+", '"+facha+"', '"+DatosCliente+"', '"+DatosEmpleado+"', '"+FormaPago+"',"+TotalVenta+")";
             

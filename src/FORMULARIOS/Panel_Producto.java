@@ -721,6 +721,7 @@ for(int i = 0; i < ADT; i++) {
             precio.setText("");
             descripcion.setText("");
             ingredientes.setSelectedItem("");
+            a_vector.setText("");
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Panel_Producto.class.getName()).log(Level.SEVERE, null, ex);
