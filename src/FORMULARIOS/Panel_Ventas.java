@@ -1,7 +1,10 @@
 
 package FORMULARIOS;
 
+import com.sun.source.tree.BreakTree;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 
 
 public class Panel_Ventas extends javax.swing.JPanel {
@@ -22,14 +26,14 @@ public class Panel_Ventas extends javax.swing.JPanel {
     public Panel_Ventas() {
         initComponents();
         
-        String ids [] = {"ID_FAMILIA","NOMBRE","DESCRIPCION"};
+        String ids [] = {"ID_VENTA","FECHA_VENTA","DATOS_CLIENTE","DATOS_EMPLEADO","FORMA_PAGO","TOTAL"};
         tb.setColumnIdentifiers(ids);
         tabla.setModel(tb);
         
         //añadir formas de pago
         pago.addItem("Efectivo");
-        pago.addItem("Con Tarjeta"+" - "+"De Contado");
-        pago.addItem("Con Tarjeta"+" - "+"A Credito");
+        pago.addItem("Con Tarjeta - De Contado");
+        pago.addItem("Con Tarjeta - A Credito");
         
         
         
@@ -207,6 +211,8 @@ public class Panel_Ventas extends javax.swing.JPanel {
         btnmostrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        valorventa = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(228, 242, 247));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)), "INGRESAR VENTA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 36), new java.awt.Color(0, 0, 0))); // NOI18N
@@ -219,6 +225,11 @@ public class Panel_Ventas extends javax.swing.JPanel {
         id.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         id.setForeground(new java.awt.Color(0, 0, 0));
         id.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -256,6 +267,11 @@ public class Panel_Ventas extends javax.swing.JPanel {
         pago.setBackground(new java.awt.Color(209, 235, 247));
         pago.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         pago.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+        pago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pagoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -327,6 +343,14 @@ public class Panel_Ventas extends javax.swing.JPanel {
         tabla.setForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(tabla);
 
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("VALOR_VENTA:");
+
+        valorventa.setBackground(new java.awt.Color(209, 235, 247));
+        valorventa.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        valorventa.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -338,7 +362,11 @@ public class Panel_Ventas extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addGap(40, 40, 40)
                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(415, 415, 415)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(valorventa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
                         .addComponent(jLabel3)
                         .addGap(40, 40, 40)
                         .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -385,7 +413,9 @@ public class Panel_Ventas extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
                         .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3))
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel8)
+                        .addComponent(valorventa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -406,7 +436,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
                     .addComponent(btneditar)
                     .addComponent(btneliminar)
                     .addComponent(btnmostrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -481,7 +511,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-
+DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales       
         try {
 
 
@@ -539,7 +569,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
             String FormaPago = pago.getSelectedItem().toString();
             
             //Total Venta
-            double TotalVenta = Double.parseDouble(totalventa.getText().trim());
+            double TotalVenta = Double.parseDouble(totalventa.getText().trim().replace(",", ""));
             
             
             //Establecer Conexión con la base de datos
@@ -559,7 +589,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
             con.cerrar();
                      
             //Mostrar Los Datos En La Tabla
-            tb.addRow(new Object []{Id, facha, DatosCliente, DatosEmpleado, FormaPago, TotalVenta} );
+            tb.addRow(new Object []{Id, facha, DatosCliente, DatosEmpleado, FormaPago, formato.format(TotalVenta)} );
             
             
             //Limpiar Los Campos
@@ -650,7 +680,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        
+        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales       
          //Declarar variables
        Connection conect = null;
        PreparedStatement search = null;
@@ -680,8 +710,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                fecha.setDate(rs.getDate("fecha_venta"));
                datoscliente.setSelectedItem(rs.getString("datoscliente_venta"));
                datosempleado.setSelectedItem(rs.getString("datosempleado_venta"));
-               pago.setSelectedItem(rs.getString("formapago_venta"));
-               totalventa.setText(rs.getString("total_venta"));
+               totalventa.setText(formato.format(rs.getDouble("total_venta")));
                
                
                JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
@@ -847,6 +876,150 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
 }
     }//GEN-LAST:event_btneditarActionPerformed
 
+    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+       
+        
+        id.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+                
+              Connection conect = null;
+              PreparedStatement search = null;
+              ResultSet rs = null;
+                
+                try {
+                    long iddetalle_seleccionado = Long.parseLong((String) id.getSelectedItem());
+                    
+                    //Establecer Conexión con la BD
+                    Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+                    
+                    con.ConexionPostgres();
+             
+               conect=con.getConnection();
+           
+            String query = ("Select * From detalle_ventas WHERE id_venta=? ");
+            
+             search = conect.prepareStatement(query);
+             
+             search.setLong(1, iddetalle_seleccionado);
+             
+             rs = search.executeQuery();
+             
+             if(rs.next()){
+                 
+                  double tot = Double.parseDouble(rs.getString("total_detalle"));
+                 
+                  valorventa.setText(formato.format(tot));
+             }
+                    
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        });
+        
+    }//GEN-LAST:event_idActionPerformed
+
+    private void pagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagoActionPerformed
+        
+        
+        for (ActionListener al : pago.getActionListeners()) {
+    pago.removeActionListener(al);
+}
+               
+        pago.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+        String forma_de_pago = pago.getSelectedItem().toString();   
+        
+        double valor_venta = Double.parseDouble(valorventa.getText().replace(",", ""));
+        double cargo = 2000;
+        
+        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+                
+        //efectivo
+                if(forma_de_pago == "Efectivo"){
+                    
+                    totalventa.setText(formato.format(valor_venta));    
+                    
+                    //tarjeta de contado
+                }else if(forma_de_pago == "Con Tarjeta - De Contado"){
+                    
+                    int confirmacion;
+                    
+                   pago.setEnabled(false);
+                    confirmacion = JOptionPane.showConfirmDialog(null, "Se Cobraran 2,000.00 adicionales"+"\n" +"como RECARGO por el uso de tarjeta. ¿OK?","RECARGO POR USO DE TARJETA",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                    pago.setEnabled(true);
+                    if(confirmacion == JOptionPane.YES_OPTION){
+                    
+                        
+                    double valor_total = (valor_venta+cargo);
+                    
+                    totalventa.setText(formato.format(valor_total));
+                     
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Seleccione otro Metodo de Pago Disponible","SELECCIONAR OTRO METODO DE PAGO",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    //tarjeta a credito
+                }else if(forma_de_pago == "Con Tarjeta - A Credito"){
+                    
+                    String [ ] Opciones = {"1 mes",
+                     "2 meses",
+                     "3 meses"};
+                    
+                      int meses = JOptionPane.showOptionDialog(null, "Seleccione a cuantos meses quiere el pago a credito", "Opciones para credito", 0,JOptionPane.INFORMATION_MESSAGE,null ,Opciones, "1 mes");
+                    //un mes
+                      if(meses == 0){
+                          
+                          double unmes = ((valor_venta*1.05)+cargo);
+                          double valorcredito = (unmes-valor_venta);
+                          
+                            totalventa.setText(formato.format(unmes));
+                          
+                          JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en un mes se sumara un 5%"+"\n"+"equivalente a $"+formato.format(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
+                           +"\n"+"Le corresponde una cuota de $"+formato.format(unmes));
+                          
+                          //dos meses
+                      }else if(meses == 1){
+                          
+                           double dosmeses = ((valor_venta*1.10)+cargo);
+                          double cuotas = (dosmeses/2);
+                          double valorcredito = (dosmeses-valor_venta);
+                           
+                          totalventa.setText(formato.format(dosmeses));
+                          
+                           JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en dos meses se sumara un 10%"+"\n"+"equivalente a $"+formato.format(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
+                           +"\n"+"Le corresponden dos cuotas de $"+formato.format(cuotas));
+                           
+                          //tres meses
+                      }else if(meses == 2){
+                          
+                          double tresmeses = ((valor_venta*1.15)+cargo);
+                          double cuotas = (tresmeses/3);
+                          double valorcredito = (tresmeses-valor_venta);
+                                               
+                          totalventa.setText(formato.format(tresmeses));
+                          
+                           JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en tres meses se sumara un 15%"+"\n"+"equivalente a $"+formato.format(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
+                           +"\n"+"Le corresponden tres cuotas de $"+formato.format(cuotas));
+                          
+                      }
+                      
+                }              
+            }
+        });
+    }//GEN-LAST:event_pagoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
@@ -864,10 +1037,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> pago;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField totalventa;
+    private javax.swing.JTextField valorventa;
     // End of variables declaration//GEN-END:variables
 }
