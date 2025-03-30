@@ -48,7 +48,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
               
                conect=con.getConnection();
            
-            String query = ("Select * From detalle_ventas order by id_venta ASC");
+            String query = ("Select * From detalle_ventas order by id_venta DESC");
             
              loguin = conect.prepareStatement(query);
              

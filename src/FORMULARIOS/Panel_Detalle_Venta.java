@@ -12,9 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -401,8 +403,8 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         
         DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
          try {
-
-
+             
+             
             //Validar Datos
             if(iddetalle.getText().length() == 0){
                 JOptionPane.showMessageDialog(null, "Debe rellenar el campo de ID de Detalle", "Campo Vacio", JOptionPane.ERROR_MESSAGE);
@@ -434,15 +436,15 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                 long IDventa_ADT = Long.parseLong(tb.getValueAt(i, 1).toString());             
                 
                 //Asignar Dato en la Tabla (SUBTOTAL)
-                double Subtotal_ADT = Double.parseDouble(tb.getValueAt(i, 2).toString());
-                
+                double Subtotal_ADT = Double.parseDouble(tb.getValueAt(i, 2).toString().replace(",", ""));
+                                           
                 //Asignar Dato en la Tabla (TOTAL)              
-                double Total_ADT = Double.parseDouble(tb.getValueAt(i, 3).toString());
+                double Total_ADT = Double.parseDouble(tb.getValueAt(i, 3).toString().replace(",", ""));
 
             }
-            
+                       
             //Obtener Los Datos Para Insertarlos
-            
+              
             //ID de detalle
             long Id_detalle = Long.parseLong(iddetalle.getText().trim());
             
@@ -452,10 +454,47 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
            
            //Subtotal
            double subtotal_detalle = Double.parseDouble(subtotal.getText().replace(",",""));
+           
+
+            if(descuentos.getItemCount() == 0){
+                    totaldetalle.setText(subtotal_detalle+"");
+                }
                        
             //Total 
             double Total_detalle = Double.parseDouble(totaldetalle.getText().replace(",", ""));
                         
+            
+            //PRODUCTOS TABLA REFERENTE AL DETALLE
+        
+           for( int i = 0; i<tabla2.getRowCount(); i++){
+            DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
+            
+             long id_producto_detalleventa = Long.parseLong(modelo.getValueAt(i, 0).toString());
+             
+             String nombre_producto_detalleventa = modelo.getValueAt(i, 1).toString();
+             
+             double valorunitario_producto_detalleventa = Double.parseDouble(modelo.getValueAt(i, 2).toString().replace(",",""));
+             
+             double cantidad_producto_detalleventa = Double.parseDouble(modelo.getValueAt(i, 3).toString());
+             
+             double subtotal_producto_detalleventa =Double.parseDouble(modelo.getValueAt(i, 4).toString().replace(",", ""));
+             
+              System.out.println(Id_detalle+"\n"+id_producto_detalleventa+"\n"+nombre_producto_detalleventa+"\n"+valorunitario_producto_detalleventa+"\n"+cantidad_producto_detalleventa+"\n"+subtotal_producto_detalleventa);
+           
+              
+              //Establecer Conexión con la base de datos
+            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+            
+            con.ConexionPostgres();
+            //query o consulta
+            String query = "Insert into productos_detalleventas values("+Id_detalle+", "+id_producto_detalleventa+", '"+nombre_producto_detalleventa+"', "+valorunitario_producto_detalleventa+","+cantidad_producto_detalleventa+","+subtotal_detalle+"  )";
+              
+            System.out.println(query);
+            con.actualizar(query);
+                        
+         }
+            
+                         
             //Establecer Conexión con la base de datos
             Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
             
@@ -468,11 +507,15 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
             
             JOptionPane.showMessageDialog(null, "DETALLE DE VENTA REALIZADO CON EXITO");
             
+            
+            DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
+            modelo.setRowCount(0); // Borra todas las filas
+            
             //Cerrar conexión
             con.cerrar();          
             
             //Mostrar Los Datos En La Tabla
-            tb.addRow(new Object []{Id_detalle,id_venta,formato.format(subtotal_detalle),formato.format(Total_detalle)} );
+            tb.addRow(new Object []{Id_detalle,id_venta,(subtotal_detalle),(Total_detalle)} );
                      
             //Limpiar Los Campos
             iddetalle.setText("");
@@ -481,9 +524,34 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
             totaldetalle.setText("");
             descuentos.removeAllItems();
             
-            
-            con.ConexionPostgres();
-            
+            //Listar Desde La BD
+        tb.setRowCount(0);
+        
+        //Establecer Conexión con la base de datos         
+            try{
+                
+                con.ConexionPostgres();
+                
+                String seleccionar_ = "SELECT * FROM detalle_ventas order by id_detalle ASC";
+                
+                ResultSet rs = con.consultar(seleccionar_);
+                
+                while(rs.next()){
+                    
+                    tb.addRow(new Object[]{
+                    
+                   rs.getLong("id_detalle"),
+                   rs.getLong("id_venta"),
+                   formato.format(rs.getDouble("subtotal_detalle")),
+                   formato.format(rs.getDouble("total_detalle"))
+                            
+                    });
+                }                            
+            }catch (Exception ex) {
+ex.printStackTrace();
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA BASE DE DATOS");
+}
+           con.cerrar();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -492,105 +560,123 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
             Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-          //Listar Desde La BD
-        tb.setRowCount(0);
-        
-        //Establecer Conexión con la base de datos
-            Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
-            
-            try{
-                
-                con.ConexionPostgres();
-                
-                String seleccionar = "SELECT * FROM detalle_ventas";
-                
-                ResultSet rs = con.consultar(seleccionar);
-                
-                while(rs.next()){
-                    
-                    tb.addRow(new Object[]{
-                    
-                    rs.getLong("id_detalle"),
-                    rs.getLong("idventa_detalle"),
-                    rs.getDouble("subtotal_detalle"),
-                    rs.getDouble("total_detalle")
-                            
-                    });
-                }                            
-            }catch (Exception ex) {
-ex.printStackTrace();
-
-JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA BASE DE DATOS");
-}
-            
-            
-           
+        }           
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        
-        
-          //Declarar variables
-       Connection conect = null;
-       PreparedStatement search = null;
-       ResultSet rs = null;
-        
-        
-        //try catch
-          try{
-            Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
-           
-           con.ConexionPostgres();
-           
-           conect=con.getConnection();
-           
-            String Mostrar = ("SELECT * FROM detalle_ventas WHERE id_detalle = ?");
-            
-              search = conect.prepareStatement(Mostrar);
+                                          
+              DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+              
+              //Declarar variables
+              Connection conect = null;
+              PreparedStatement search = null;
+              ResultSet rs = null;
               
               long IdBuscar = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese el id para buscar", "Buscar", JOptionPane.INFORMATION_MESSAGE));
+              
+              //try catch
+              try{
+                  Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+                  
+                  con.ConexionPostgres();
+                  
+                  conect=con.getConnection();
+                  
+                  //buscar datos basicos
+                  
+                  String Mostrar = ("SELECT * FROM detalle_ventas WHERE id_detalle = ?");
+                  
+                  search = conect.prepareStatement(Mostrar);
+                  
+                  
+                  search.setLong(1, IdBuscar);
+                  
+                  rs= search.executeQuery();
+                  
+                  if(rs.next()){
+                      
+                      double subt = Double.parseDouble(rs.getString("subtotal_detalle"));
+                      double tot = Double.parseDouble(rs.getString("total_detalle"));
+                      
+                      iddetalle.setText(rs.getString("id_detalle"));
+                      idventa.setText(rs.getString("id_venta"));
+                      subtotal.setText(formato.format(subt));
+                      totaldetalle.setText(formato.format(tot));
+                      
+                      
+                      
+                      
+                  }else{
+                      JOptionPane.showMessageDialog(null, "Registro no encontrado", "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
+                  }
+                  
+              }
+              catch(NumberFormatException e){
+                  JOptionPane.showMessageDialog(null, "Ingrese un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
+              }
+              catch(SQLException e){
+                  JOptionPane.showMessageDialog(null, "Error en la base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
+              }
+              catch(HeadlessException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
+                  JOptionPane.showMessageDialog(null, "Error inesperado", "Error", JOptionPane.ERROR_MESSAGE);
+              }
+              finally{
+                  try {
+                      if(rs != null) rs.close();
+                      if(search != null)search.close();
+                      if(conect != null)conect.close();
+                  } catch (SQLException ex) {
+                      Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+              }
+               try{         
+              
+              Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+              
+              //Buscar Porductos asociados
+              con.ConexionPostgres();
+              conect = con.getConnection();
+              
+              String buscarproductos = ("SELECT*FROM productos_detalleventas WHERE id_detalle_tabladetalle= ?");
+              
+              search = conect.prepareStatement(buscarproductos);
               search.setLong(1, IdBuscar);
               
-           rs= search.executeQuery();
-            
-           if(rs.next()){
-   
-               iddetalle.setText(rs.getString("id_detalle"));
-               idventa.setText(rs.getString("id_venta"));
-               subtotal.setText(rs.getString("subtotal_detalle"));
-               totaldetalle.setText(rs.getString("total_detalle"));
-               
-
-               
-               
-               JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
-               
-           }else{
-
-               
-               JOptionPane.showMessageDialog(null, "Registro no encontrado", "Registro no Encontrado", JOptionPane.ERROR_MESSAGE);
-           }
+              rs= search.executeQuery();
+              
+              while(rs.next()){
+                  
+                  long id_producto =  rs.getLong("id_producto_tabladetalle");
+                  
+                  String nombre_producto = rs.getString("nombre_producto_tabladetalle");
+                  
+                  double valoru_producto = rs.getDouble("valoru_producto_tabla");
+                  
+                  double cantidadu_producto = rs.getDouble("productoc_producto_tabladetalle");
+                  
+                  double subtotal_producto = rs.getDouble("subt_producto_tabladetalle");
+                  
+                  tb2.addRow(new  Object[]{id_producto,nombre_producto,formato.format(valoru_producto),cantidadu_producto,formato.format(subtotal_producto)});
+                  
+                 
+              }
+              
+              JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
+                         
+          }
+       catch(ClassNotFoundException ex){
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
        }
-       catch(NumberFormatException e){
-           JOptionPane.showMessageDialog(null, "Ingrese un numero valido", "Error", JOptionPane.ERROR_MESSAGE);
+        catch(SQLException ex){
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
        }
-        catch(SQLException e){
-           JOptionPane.showMessageDialog(null, "Error en la base de Datos", "Error", JOptionPane.ERROR_MESSAGE);
-       }
-       catch(HeadlessException | ClassNotFoundException | IllegalAccessException | InstantiationException e){
-           JOptionPane.showMessageDialog(null, "Error inesperado", "Error", JOptionPane.ERROR_MESSAGE);
-       }
-        finally{
-           try {
-               if(rs != null) rs.close();
-               if(search != null)search.close();
-               if(conect != null)conect.close();
-           } catch (SQLException ex) {
-               Logger.getLogger(Panel_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       }
+       catch(InstantiationException ex){
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (IllegalAccessException ex) {
+             Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+         } 
+          
+          
         
     }//GEN-LAST:event_btnbuscarActionPerformed
 
@@ -618,13 +704,17 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                  
                  con.ConexionPostgres();
                  
-                 String query_delete = "DELETE FROM detalle_ventas WHERE id_detalle= ' "+Id_venta+" ' ";
+                 String query_delete = "DELETE FROM detalle_ventas WHERE id_detalle= '"+Id_venta+"'";
+                 String query_delete_productos = "DELETE FROM productos_detalleventas WHERE id_detalle_tabladetalle = '"+Id_venta+"'";
+                 
+                 int FilasAfectadasP = con.actualizar1(query_delete_productos);
                  int FilasAfectadas = con.actualizar1(query_delete);
                  
-                 if(FilasAfectadas > 0){
+                 if(FilasAfectadas > 0 && FilasAfectadasP > 0){
                      JOptionPane.showMessageDialog(null, "Detalle de Venta eliminado con exíto");
-                     
-                     ((DefaultTableModel)tabla.getModel()).removeRow(fila);
+                    
+                     DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
+                     modelo.setRowCount(0); // Borra todas las filas
                  }
                  else{
                      
@@ -649,36 +739,39 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void btnmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmostrarActionPerformed
 DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales       
-         //Listar Desde La BD
+       
+     
+                 //Listar Desde La BD
         tb.setRowCount(0);
         
-        //Establecer Conexión con la base de datos
+        //Establecer Conexión con la base de datos        
+
             Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
-            
             try{
                 
                 con.ConexionPostgres();
                 
-                String seleccionar = "SELECT * FROM detalle_ventas";
+                String seleccionar_ = "SELECT * FROM detalle_ventas order by id_detalle ASC";
                 
-                ResultSet rs = con.consultar(seleccionar);
+                ResultSet rs = con.consultar(seleccionar_);
                 
                 while(rs.next()){
                     
                     tb.addRow(new Object[]{
                     
-                    rs.getLong("id_detalle"),
-                    rs.getLong("id_venta"),
-                    formato.format(rs.getDouble("subtotal_detalle")),
-                   formato.format( rs.getDouble("total_detalle"))
+                   rs.getLong("id_detalle"),
+                   rs.getLong("id_venta"),
+                   formato.format(rs.getDouble("subtotal_detalle")),
+                   formato.format(rs.getDouble("total_detalle"))
                             
                     });
-                }                            
+                } con.cerrar();
             }catch (Exception ex) {
 ex.printStackTrace();
-
 JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA BASE DE DATOS");
-}      
+}
+
+
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -819,7 +912,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void descuentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descuentosActionPerformed
         
-        String descuento_seleccionado = descuentos.getSelectedItem().toString();
+        String descuento_seleccionado = (String) descuentos.getSelectedItem();
         
         DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
         
@@ -827,7 +920,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String descuento_seleccionado = descuentos.getSelectedItem().toString();
+                String descuento_seleccionado = (String) descuentos.getSelectedItem();
                 
                 if(descuento_seleccionado == "Descuento del 5% por 5 o mas unidades"){
                     
@@ -844,7 +937,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                     double descuento8U = subt-(subt*0.10);
                     
                     totaldetalle.setText(""+formato.format(descuento8U));
-                }           
+                }     
             }
         });
     }//GEN-LAST:event_descuentosActionPerformed
@@ -890,6 +983,9 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                 descuentos.removeAllItems();
                 
                  tb2.removeRow(tabla2.getSelectedRow());
+                 
+                 subtotal.setText("");
+                 totaldetalle.setText("");
                  
                  
                 
