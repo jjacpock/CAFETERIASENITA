@@ -687,6 +687,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
        ResultSet rs = null;
         
         
+       
         //try catch
           try{
             Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
