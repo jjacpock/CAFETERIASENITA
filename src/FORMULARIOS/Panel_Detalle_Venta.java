@@ -400,8 +400,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        
-        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+
          try {
              
              
@@ -453,7 +452,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
             
            
            //Subtotal
-           double subtotal_detalle = Double.parseDouble(subtotal.getText().replace(",",""));
+           double subtotal_detalle = Double.parseDouble(subtotal.getText());
            
 
             if(descuentos.getItemCount() == 0){
@@ -461,7 +460,7 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                 }
                        
             //Total 
-            double Total_detalle = Double.parseDouble(totaldetalle.getText().replace(",", ""));
+            double Total_detalle = Double.parseDouble(totaldetalle.getText());
                         
             
             //PRODUCTOS TABLA REFERENTE AL DETALLE
@@ -542,8 +541,8 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                     
                    rs.getLong("id_detalle"),
                    rs.getLong("id_venta"),
-                   formato.format(rs.getDouble("subtotal_detalle")),
-                   formato.format(rs.getDouble("total_detalle"))
+                   (rs.getDouble("subtotal_detalle")),
+                   (rs.getDouble("total_detalle"))
                             
                     });
                 }                            
@@ -565,7 +564,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
                                           
-              DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+            
               
               //Declarar variables
               Connection conect = null;
@@ -600,8 +599,8 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                       
                       iddetalle.setText(rs.getString("id_detalle"));
                       idventa.setText(rs.getString("id_venta"));
-                      subtotal.setText(formato.format(subt));
-                      totaldetalle.setText(formato.format(tot));
+                      subtotal.setText((subt)+"");
+                      totaldetalle.setText((tot)+"");
                       
                       
                       
@@ -656,7 +655,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                   
                   double subtotal_producto = rs.getDouble("subt_producto_tabladetalle");
                   
-                  tb2.addRow(new  Object[]{id_producto,nombre_producto,formato.format(valoru_producto),cantidadu_producto,formato.format(subtotal_producto)});
+                  tb2.addRow(new  Object[]{id_producto,nombre_producto,(valoru_producto),cantidadu_producto,(subtotal_producto)});
                   
                  JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
               }
@@ -776,7 +775,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+        
 
         
         
@@ -813,12 +812,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                  
                   //pedir las unidades a comprar
                   
-                  double unidades = Double.parseDouble(JOptionPane.showInputDialog(null,"Teniendo en cuenta que el valor unitario del producto es de $"+formato.format(valorunitario)+"\n"+"¿Cuantas unidades desea adquirir?","Unidades solicitadas",JOptionPane.INFORMATION_MESSAGE));
+                  double unidades = Double.parseDouble(JOptionPane.showInputDialog(null,"Teniendo en cuenta que el valor unitario del producto es de $"+(valorunitario)+"\n"+"¿Cuantas unidades desea adquirir?","Unidades solicitadas",JOptionPane.INFORMATION_MESSAGE));
                   
                   double unidadesXvalorunitario = unidades*valorunitario;
                   
           
-          tb2.addRow(new  Object[]{id_producto,producto,formato.format(valorunitario),unidades,formato.format(unidadesXvalorunitario)});
+          tb2.addRow(new  Object[]{id_producto,producto,(valorunitario),unidades,(unidadesXvalorunitario)});
                  
           
             double suma = 0.0;
@@ -827,7 +826,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                for( int i = 0; i<tabla2.getRowCount(); i++){
             DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
  
-            String fila = modelo.getValueAt(i, 4).toString().replace(",", "");
+            String fila = modelo.getValueAt(i, 4).toString();
             
             suma+= Double.parseDouble(fila);
             
@@ -837,12 +836,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                
                
 
-               subtotal.setText(formato.format(suma)+"");
+               subtotal.setText((suma)+"");
                
                               for( int i = 0; i<tabla2.getRowCount(); i++){
             DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
  
-            String fila = modelo.getValueAt(i, 3).toString().replace(",","");
+            String fila = modelo.getValueAt(i, 3).toString();
             
             sumaC+= Double.parseDouble(fila);
             
@@ -911,11 +910,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void descuentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descuentosActionPerformed
-        
-        String descuento_seleccionado = (String) descuentos.getSelectedItem();
-        
-        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
-        
+                        
         descuentos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -924,19 +919,19 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                 
                 if(descuento_seleccionado == "Descuento del 5% por 5 o mas unidades"){
                     
-                    double subt = Double.parseDouble(subtotal.getText().trim().replace(",", ""));
+                    double subt = Double.parseDouble(subtotal.getText().trim());
                     
                     double descuento5U = subt-(subt*0.05);
                     
-                    totaldetalle.setText(""+formato.format(descuento5U));
+                    totaldetalle.setText(""+(descuento5U));
                     
                 }else if(descuento_seleccionado == "Descuento del 10% por 8 o mas unidades"){
                     
-                    double subt = Double.parseDouble(subtotal.getText().trim().replace(",", ""));
+                    double subt = Double.parseDouble(subtotal.getText().trim());
                     
                     double descuento8U = subt-(subt*0.10);
                     
-                    totaldetalle.setText(""+formato.format(descuento8U));
+                    totaldetalle.setText(""+(descuento8U));
                 }     
             }
         });
@@ -944,7 +939,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void btneliminartabla2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminartabla2ActionPerformed
 
-         DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+        
         
         
          int confirmacion;
@@ -967,9 +962,9 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
                 DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
                 
-                double subt = Double.parseDouble(subtotal.getText().trim().replace(",", ""));
+                double subt = Double.parseDouble(subtotal.getText().trim());
 
-                String fila_ = modelo.getValueAt(i, 4).toString().replace(",", "");
+                String fila_ = modelo.getValueAt(i, 4).toString();
                 
                 resta = subt-(Double.parseDouble(fila_));
                 
@@ -978,7 +973,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                     System.out.println(resta);
 }               
                         
-                subtotal.setText(""+formato.format(resta));
+                subtotal.setText(""+(resta));
                 
                 descuentos.removeAllItems();
                 
@@ -997,7 +992,6 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
         String descuento_seleccionado = familia.getSelectedItem().toString();
         
-        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
         
         familia.addActionListener(new ActionListener() {
             @Override

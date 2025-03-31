@@ -511,7 +511,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales       
+
         try {
 
 
@@ -589,7 +589,7 @@ DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadore
             con.cerrar();
                      
             //Mostrar Los Datos En La Tabla
-            tb.addRow(new Object []{Id, facha, DatosCliente, DatosEmpleado, FormaPago, formato.format(TotalVenta)} );
+            tb.addRow(new Object []{Id, facha, DatosCliente, DatosEmpleado, FormaPago,(TotalVenta)} );
             
             
             //Limpiar Los Campos
@@ -631,7 +631,7 @@ DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadore
                     rs.getString("datoscliente_venta"),
                     rs.getString("datosempleado_venta"),
                     rs.getString("formapago_venta"),
-                    rs.getDouble("total_venta")
+                    (rs.getDouble("total_venta"))
                             
                     });
                 }                            
@@ -680,7 +680,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
     }//GEN-LAST:event_btnmostrarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales       
+        
          //Declarar variables
        Connection conect = null;
        PreparedStatement search = null;
@@ -711,7 +711,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                fecha.setDate(rs.getDate("fecha_venta"));
                datoscliente.setSelectedItem(rs.getString("datoscliente_venta"));
                datosempleado.setSelectedItem(rs.getString("datosempleado_venta"));
-               totalventa.setText(formato.format(rs.getDouble("total_venta")));
+               totalventa.setText(""+(rs.getDouble("total_venta")));
                
                
                JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
@@ -884,7 +884,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+             
                 
               Connection conect = null;
               PreparedStatement search = null;
@@ -912,7 +912,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                  
                   double tot = Double.parseDouble(rs.getString("total_detalle"));
                  
-                  valorventa.setText(formato.format(tot));
+                  valorventa.setText(""+(tot));
              }
                     
                 } catch (ClassNotFoundException ex) {
@@ -946,12 +946,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
         double valor_venta = Double.parseDouble(valorventa.getText().replace(",", ""));
         double cargo = 2000;
         
-        DecimalFormat formato = new DecimalFormat("#,###.00"); // Formato con separadores de miles y dos decimales
+
                 
         //efectivo
                 if(forma_de_pago == "Efectivo"){
                     
-                    totalventa.setText(formato.format(valor_venta));    
+                    totalventa.setText(""+(valor_venta));    
                     
                     //tarjeta de contado
                 }else if(forma_de_pago == "Con Tarjeta - De Contado"){
@@ -966,7 +966,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                         
                     double valor_total = (valor_venta+cargo);
                     
-                    totalventa.setText(formato.format(valor_total));
+                    totalventa.setText(""+(valor_total));
                      
                     }else{
                         JOptionPane.showMessageDialog(null, "Seleccione otro Metodo de Pago Disponible","SELECCIONAR OTRO METODO DE PAGO",JOptionPane.INFORMATION_MESSAGE);
@@ -985,10 +985,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                           double unmes = ((valor_venta*1.05)+cargo);
                           double valorcredito = (unmes-valor_venta);
                           
-                            totalventa.setText(formato.format(unmes));
+                            totalventa.setText(""+(unmes));
                           
-                          JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en un mes se sumara un 5%"+"\n"+"equivalente a $"+formato.format(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
-                           +"\n"+"Le corresponde una cuota de $"+formato.format(unmes));
+                          JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en un mes se sumara un 5%"+"\n"+"equivalente a $"+(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
+                           +"\n"+"Le corresponde una cuota de $"+(unmes));
                           
                           //dos meses
                       }else if(meses == 1){
@@ -997,10 +997,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                           double cuotas = (dosmeses/2);
                           double valorcredito = (dosmeses-valor_venta);
                            
-                          totalventa.setText(formato.format(dosmeses));
+                          totalventa.setText(""+(dosmeses));
                           
-                           JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en dos meses se sumara un 10%"+"\n"+"equivalente a $"+formato.format(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
-                           +"\n"+"Le corresponden dos cuotas de $"+formato.format(cuotas));
+                           JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en dos meses se sumara un 10%"+"\n"+"equivalente a $"+(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
+                           +"\n"+"Le corresponden dos cuotas de $"+(cuotas));
                            
                           //tres meses
                       }else if(meses == 2){
@@ -1009,10 +1009,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
                           double cuotas = (tresmeses/3);
                           double valorcredito = (tresmeses-valor_venta);
                                                
-                          totalventa.setText(formato.format(tresmeses));
+                          totalventa.setText(""+(tresmeses));
                           
-                           JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en tres meses se sumara un 15%"+"\n"+"equivalente a $"+formato.format(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
-                           +"\n"+"Le corresponden tres cuotas de $"+formato.format(cuotas));
+                           JOptionPane.showMessageDialog(null, "Para que logres hacer tu pago en tres meses se sumara un 15%"+"\n"+"equivalente a $"+(valorcredito)+" de interes y 2000 de cargo por manejo de tarjeta."
+                           +"\n"+"Le corresponden tres cuotas de $"+(cuotas));
                           
                       }
                       
