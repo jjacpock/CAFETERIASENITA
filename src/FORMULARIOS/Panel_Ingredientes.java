@@ -601,8 +601,7 @@ try{
             //Valor Nutricional
             String Valor_Nutricional= infonutricional.getText().trim();
             
-;
-            
+
             //Establecer Conexión con la base de datos
             Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
             
@@ -639,34 +638,34 @@ try{
             Logger.getLogger(Panel_Ingredientes.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-   //Listar Desde La BD
-        tb.setRowCount(0);
+     //Listar Desde La BD
+    tb.setRowCount(0);
 //Establecer la conexión
 Conexion con1 = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
 
 try{
     
-con1.ConexionPostgres();
-
-String seleccionar = "SELECT * FROM ingredientes";
-
-ResultSet resultado = con1.consultar(seleccionar);
-
-while (resultado.next()){
-
-tb.addRow(new Object[]{
-
-resultado.getLong("id_ingrediente"),
-resultado.getString("nombre_ingrediente"),
-resultado.getString("descripcion_ingrediente"),
-resultado.getString("valornutricional_ingrediente")
-});
-
-}     } catch (Exception ex) {
-ex.printStackTrace();
-
+    con1.ConexionPostgres();
+    
+    String seleccionar = "SELECT * FROM ingredientes";
+    
+    ResultSet resultado = con1.consultar(seleccionar);
+    
+    while (resultado.next()){
+        
+        tb.addRow(new Object[]{
+            
+            resultado.getLong("id_ingrediente"),
+            resultado.getString("nombre_ingrediente"),
+            resultado.getString("descripcion_ingrediente"),
+            resultado.getString("valor_nutricional")
+        });
+        
+    }     } catch (Exception ex) {
+        ex.printStackTrace();
+        
 JOptionPane.showMessageDialog(null, "ERROR AL CARGAR INGREDIENTES DESDE LA BASE DE DATOS");
-}
+    }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btnbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscar1ActionPerformed

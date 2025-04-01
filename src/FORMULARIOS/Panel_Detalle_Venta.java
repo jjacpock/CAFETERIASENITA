@@ -657,8 +657,9 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                   
                   tb2.addRow(new  Object[]{id_producto,nombre_producto,(valoru_producto),cantidadu_producto,(subtotal_producto)});
                   
-                 JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
+                 
               }
+              JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
               
               
                          
