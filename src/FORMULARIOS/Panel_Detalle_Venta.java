@@ -146,6 +146,11 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         iddetalle.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         iddetalle.setForeground(new java.awt.Color(0, 0, 0));
         iddetalle.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        iddetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iddetalleActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1044,6 +1049,11 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
             } 
          });
     }//GEN-LAST:event_familiaActionPerformed
+
+    private void iddetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iddetalleActionPerformed
+
+        idventa.requestFocus();
+    }//GEN-LAST:event_iddetalleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
