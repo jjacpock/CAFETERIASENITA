@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package FORMULARIOS;
 
 import java.awt.Color;
@@ -20,10 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Usuario
- */
+
 public class Panel_Producto extends javax.swing.JPanel {
     
     public static String cad=" ", cad1=" ";
@@ -547,6 +541,7 @@ public class Panel_Producto extends javax.swing.JPanel {
                precio.setText(rs.getString("precio_producto"));
                descripcion.setText(rs.getString("descripcion_producto"));
                ingredientes.setSelectedItem(rs.getString("ingrediente_producto"));
+               a_vector.setText(rs.getString("ingrediente_producto"));
                
                
                JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);

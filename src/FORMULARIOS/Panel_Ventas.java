@@ -638,7 +638,7 @@ public class Panel_Ventas extends javax.swing.JPanel {
             }catch (Exception ex) {
 ex.printStackTrace();
 
-JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE DATOS");
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR VENTAS DESDE LA BASE DE DATOS");
 }          
     }//GEN-LAST:event_btnguardarActionPerformed
 
@@ -674,7 +674,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
             }catch (Exception ex) {
 ex.printStackTrace();
 
-JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE DATOS");
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR VENTAS DESDE LA BASE DE DATOS");
 }
             
     }//GEN-LAST:event_btnmostrarActionPerformed
@@ -700,7 +700,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
             
               search = conect.prepareStatement(Mostrar);
               
-              long IdBuscar = Long.parseLong(JOptionPane.showInputDialog(null, "Ingrese la Cedula para buscar", "Buscar", JOptionPane.INFORMATION_MESSAGE));
+              long IdBuscar = Long.parseLong(JOptionPane.showInputDialog(null, "INGRESE EL ID PARA BUSCAR", "Buscar", JOptionPane.INFORMATION_MESSAGE));
               search.setLong(1, IdBuscar);
               
            rs= search.executeQuery();
@@ -873,7 +873,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE D
             }catch (Exception ex) {
 ex.printStackTrace();
 
-JOptionPane.showMessageDialog(null, "ERROR AL CARGAR CLIENTES DESDE LA BASE DE DATOS");
+JOptionPane.showMessageDialog(null, "ERROR AL CARGAR VENTAS DESDE LA BASE DE DATOS");
 }
     }//GEN-LAST:event_btneditarActionPerformed
 
