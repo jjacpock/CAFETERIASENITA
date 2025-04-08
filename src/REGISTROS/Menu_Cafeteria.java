@@ -17,12 +17,12 @@ import FORMULARIOS.Panel_Ventas;
  *
  * @author Usuario
  */
-public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
+public class Menu_Cafeteria extends javax.swing.JFrame {
 
    
   private boolean menuAbierto = false;
            
-    public FInicio_Sesion_Cafeteria() {
+    public Menu_Cafeteria() {
         initComponents();
         
     
@@ -334,8 +334,7 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, anclaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(pnmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -427,20 +426,21 @@ public class FInicio_Sesion_Cafeteria extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FInicio_Sesion_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FInicio_Sesion_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FInicio_Sesion_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FInicio_Sesion_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Menu_Cafeteria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FInicio_Sesion_Cafeteria().setVisible(true);
+                new Menu_Cafeteria().setVisible(true);
             }
         });
     }
