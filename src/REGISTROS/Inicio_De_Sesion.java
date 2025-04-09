@@ -2,6 +2,9 @@
 package REGISTROS;
 
 import FORMULARIOS.Conexion;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,14 +15,20 @@ import javax.swing.JOptionPane;
 public class Inicio_De_Sesion extends javax.swing.JFrame {
 
     int Intentos;
-
+   
+   
     public Inicio_De_Sesion() {
         initComponents();
+                registrar.setForeground(Color.BLACK);
+        setSize(1150,470);
+        usuario.setPlaceholder("INGRESAR USUARIO");
+        contraseña.setPlaceholder("INGRESAR CONTRASEÑA");
+           
         
-        setSize(930,470);
     }
 
 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -33,9 +42,10 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         registrar = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(112, 138, 147));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1150, 470));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -53,7 +63,12 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
         usuario.setBordeColorNoFocus(new java.awt.Color(209, 235, 247));
         usuario.setCaretColor(new java.awt.Color(209, 235, 247));
         usuario.setPlaceholder("INGRESAR USUARIO");
-        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, -1, -1));
+        usuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usuarioMouseClicked(evt);
+            }
+        });
+        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 90, -1, -1));
 
         contraseña.setBackground(new java.awt.Color(209, 235, 247));
         contraseña.setForeground(new java.awt.Color(0, 0, 0));
@@ -61,7 +76,12 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
         contraseña.setBordeColorNoFocus(new java.awt.Color(209, 235, 247));
         contraseña.setCaretColor(new java.awt.Color(209, 235, 247));
         contraseña.setPlaceholder("INGRESAR CONTRASEÑA");
-        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, -1, -1));
+        contraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contraseñaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, -1, -1));
 
         iniciarsesion.setBackground(new java.awt.Color(209, 235, 247));
         iniciarsesion.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -74,32 +94,38 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
                 iniciarsesionMouseClicked(evt);
             }
         });
-        jPanel1.add(iniciarsesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, 260, 50));
+        jPanel1.add(iniciarsesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 290, 260, 50));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("INGRESA A TU MENÚ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
 
-        registrar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        registrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         registrar.setForeground(new java.awt.Color(0, 0, 0));
-        registrar.setText("REGISTRAR NUEVOS USUARIOS");
+        registrar.setText("¿ERES UN USUARIO NUEVO? REGISTRATE AQUI!!");
         registrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registrarMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registrarMouseExited(evt);
+            }
         });
-        jPanel1.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, -1, -1));
+        jPanel1.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 380, 460, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -143,9 +169,10 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
                       this.dispose();
                   }else if(Rol_.equals("EMPLEADO")){
                       
-//                      Empleado FormClie = new Empleado();
-//                      FormClie.setVisible(true);
-//                      this.dispose();
+                      Menu_Cafeteria_1 Formini1 = new Menu_Cafeteria_1();
+                      Formini1.setVisible(true);
+                      this.dispose();
+
                   }             
               }else{
                   JOptionPane.showMessageDialog(null, "Nombre de Usuario o Contraseña Incorrectos."+"\n"+" Vuelva a intentarlo", "Credenciales incorrectas", JOptionPane.ERROR_MESSAGE);
@@ -197,8 +224,36 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
     private void registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarMouseClicked
 
         new Registrar_Nuevos_Usuarios().setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_registrarMouseClicked
+
+    private void registrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarMouseEntered
+        
+         Font fuenteoriginal = registrar.getFont();     
+        registrar.setForeground(Color.BLUE);
+        Font fuenteaumentada = fuenteoriginal.deriveFont(fuenteoriginal.getSize()+2.0f);
+        registrar.setFont(fuenteaumentada);
+
+    }//GEN-LAST:event_registrarMouseEntered
+
+    private void registrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarMouseExited
+      
+        Font fuenteaumentada = registrar.getFont();
+        registrar.setForeground(Color.BLACK);
+        Font fuenteoriginal = fuenteaumentada.deriveFont(fuenteaumentada.getSize()-2.0f);
+        registrar.setFont(fuenteoriginal);
+        
+       
+    }//GEN-LAST:event_registrarMouseExited
+
+    private void usuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuarioMouseClicked
+      usuario.setPlaceholder("");
+    }//GEN-LAST:event_usuarioMouseClicked
+
+    private void contraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contraseñaMouseClicked
+       contraseña.setPlaceholder("");
+    }//GEN-LAST:event_contraseñaMouseClicked
 
     /**
      * @param args the command line arguments

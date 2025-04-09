@@ -2,6 +2,8 @@
 package REGISTROS;
 
 import FORMULARIOS.Conexion;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +37,7 @@ public class Registrar_Nuevos_Usuarios extends javax.swing.JFrame {
         usuario = new javax.swing.JTextField();
         rol = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        registrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -110,6 +113,21 @@ public class Registrar_Nuevos_Usuarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        registrar.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        registrar.setForeground(new java.awt.Color(0, 0, 0));
+        registrar.setText("¿ERES UN USUARIO REGISTRADO? INICIA SESIÓN AQUÍ!!");
+        registrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registrarMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,11 +135,13 @@ public class Registrar_Nuevos_Usuarios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(210, 210, 210)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -131,7 +151,9 @@ public class Registrar_Nuevos_Usuarios extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(15, 15, 15)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,6 +260,30 @@ public class Registrar_Nuevos_Usuarios extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarMouseClicked
+
+        new Inicio_De_Sesion().setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_registrarMouseClicked
+
+    private void registrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarMouseEntered
+
+        Font fuenteoriginal = registrar.getFont();
+        registrar.setForeground(Color.GREEN);
+        Font fuenteaumentada = fuenteoriginal.deriveFont(fuenteoriginal.getSize()+2.0f);
+        registrar.setFont(fuenteaumentada);
+    }//GEN-LAST:event_registrarMouseEntered
+
+    private void registrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarMouseExited
+
+        Font fuenteaumentada = registrar.getFont();
+        registrar.setForeground(Color.BLACK);
+        Font fuenteoriginal = fuenteaumentada.deriveFont(fuenteaumentada.getSize()-2.0f);
+        registrar.setFont(fuenteoriginal);
+
+    }//GEN-LAST:event_registrarMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -282,6 +328,7 @@ public class Registrar_Nuevos_Usuarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel registrar;
     private javax.swing.JComboBox<String> rol;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables

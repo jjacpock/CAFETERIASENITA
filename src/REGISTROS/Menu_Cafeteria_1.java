@@ -17,12 +17,12 @@ import FORMULARIOS.Panel_Ventas;
  *
  * @author Usuario
  */
-public class Menu_Cafeteria extends javax.swing.JFrame {
+public class Menu_Cafeteria_1 extends javax.swing.JFrame {
 
    
   private boolean menuAbierto = false;
            
-    public Menu_Cafeteria() {
+    public Menu_Cafeteria_1() {
         initComponents();
         
     
@@ -61,20 +61,12 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         ancla = new javax.swing.JPanel();
         pnmenu = new javax.swing.JPanel();
-        btnempleados = new javax.swing.JButton();
         btnclientes = new javax.swing.JButton();
-        btnfamilia = new javax.swing.JButton();
-        btnproducto = new javax.swing.JButton();
-        btnnutrientes = new javax.swing.JButton();
         btnventas = new javax.swing.JButton();
         btndetalleventa = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         menu = new javax.swing.JButton();
         ancla1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -114,18 +106,6 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         pnmenu.setBackground(new java.awt.Color(112, 138, 147));
         pnmenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(0, 0, 0)), "MENÚ", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Showcard Gothic", 1, 36), new java.awt.Color(0, 0, 0))); // NOI18N
 
-        btnempleados.setBackground(new java.awt.Color(121, 182, 201));
-        btnempleados.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnempleados.setForeground(new java.awt.Color(0, 0, 0));
-        btnempleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/cafe.png"))); // NOI18N
-        btnempleados.setToolTipText("AGREGAR EMPLEADO");
-        btnempleados.setContentAreaFilled(false);
-        btnempleados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnempleadosActionPerformed(evt);
-            }
-        });
-
         btnclientes.setBackground(new java.awt.Color(121, 182, 201));
         btnclientes.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnclientes.setForeground(new java.awt.Color(0, 0, 0));
@@ -135,41 +115,6 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         btnclientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnclientesActionPerformed(evt);
-            }
-        });
-
-        btnfamilia.setBackground(new java.awt.Color(121, 182, 201));
-        btnfamilia.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnfamilia.setForeground(new java.awt.Color(0, 0, 0));
-        btnfamilia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/icons8-cafeteria-64.png"))); // NOI18N
-        btnfamilia.setToolTipText("AGREGAR UNA FAMILIA");
-        btnfamilia.setContentAreaFilled(false);
-        btnfamilia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnfamiliaActionPerformed(evt);
-            }
-        });
-
-        btnproducto.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        btnproducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/menu-de-cafe.png"))); // NOI18N
-        btnproducto.setToolTipText("AÑADIR UN PRODUCTO");
-        btnproducto.setContentAreaFilled(false);
-        btnproducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnproductoActionPerformed(evt);
-            }
-        });
-
-        btnnutrientes.setBackground(new java.awt.Color(0, 153, 153));
-        btnnutrientes.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        btnnutrientes.setForeground(new java.awt.Color(0, 0, 0));
-        btnnutrientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/libro-de-cocina.png"))); // NOI18N
-        btnnutrientes.setToolTipText("AÑADIR INGREDIENTES");
-        btnnutrientes.setContentAreaFilled(false);
-        btnnutrientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnnutrientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnnutrientesActionPerformed(evt);
             }
         });
 
@@ -197,18 +142,6 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("CLIENTES");
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("EMPLEADOS");
-
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("FAMILIAS");
-
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("NUTRIENTES");
-
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("DETA-VENTA");
@@ -217,10 +150,6 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("VENTAS");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("PRODUCTOS");
-
         javax.swing.GroupLayout pnmenuLayout = new javax.swing.GroupLayout(pnmenu);
         pnmenu.setLayout(pnmenuLayout);
         pnmenuLayout.setHorizontalGroup(
@@ -228,20 +157,17 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
             .addGroup(pnmenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
                     .addComponent(btnclientes)
-                    .addComponent(jLabel2)
-                    .addComponent(btnempleados)
-                    .addComponent(jLabel1)
-                    .addComponent(btnfamilia)
-                    .addComponent(jLabel4)
-                    .addComponent(btnproducto)
-                    .addComponent(jLabel5)
-                    .addComponent(btnnutrientes)
-                    .addComponent(jLabel6)
-                    .addComponent(btndetalleventa)
                     .addComponent(btnventas)
-                    .addComponent(jLabel8))
+                    .addGroup(pnmenuLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel8))
+                    .addGroup(pnmenuLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(pnmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btndetalleventa)
+                            .addComponent(jLabel2)))
+                    .addComponent(jLabel7))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         pnmenuLayout.setVerticalGroup(
@@ -251,31 +177,15 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
                 .addComponent(btnclientes)
                 .addGap(5, 5, 5)
                 .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addComponent(btnempleados, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnfamilia)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnproducto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addGap(1, 1, 1)
-                .addComponent(btnnutrientes)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel6)
-                .addGap(5, 5, 5)
+                .addGap(18, 18, 18)
                 .addComponent(btndetalleventa)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addGap(5, 5, 5)
+                .addGap(18, 18, 18)
                 .addComponent(btnventas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
 
         menu.setBackground(new java.awt.Color(209, 235, 247));
@@ -308,7 +218,7 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Serif", 3, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("ADMINISTRADOR");
+        jLabel9.setText("EMPLEADO");
 
         javax.swing.GroupLayout anclaLayout = new javax.swing.GroupLayout(ancla);
         ancla.setLayout(anclaLayout);
@@ -366,30 +276,6 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
      Panel_Clientes p = new Panel_Clientes();
      desplegar(p);
     }//GEN-LAST:event_btnclientesActionPerformed
-
-    private void btnempleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnempleadosActionPerformed
-
-       Panel_Empleados p = new Panel_Empleados();
-       desplegar(p);
-    }//GEN-LAST:event_btnempleadosActionPerformed
-
-    private void btnfamiliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfamiliaActionPerformed
-
-        Panel_Familia p = new Panel_Familia();
-        desplegar(p);
-    }//GEN-LAST:event_btnfamiliaActionPerformed
-
-    private void btnproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnproductoActionPerformed
-
-        Panel_Producto p = new Panel_Producto();
-        desplegar(p);
-    }//GEN-LAST:event_btnproductoActionPerformed
-
-    private void btnnutrientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnutrientesActionPerformed
-
-        Panel_Ingredientes p = new Panel_Ingredientes();
-        desplegar(p);
-    }//GEN-LAST:event_btnnutrientesActionPerformed
 
     private void menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuActionPerformed
 
@@ -460,18 +346,10 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
     private javax.swing.JPanel ancla1;
     private javax.swing.JButton btnclientes;
     private javax.swing.JButton btndetalleventa;
-    private javax.swing.JButton btnempleados;
-    private javax.swing.JButton btnfamilia;
-    private javax.swing.JButton btnnutrientes;
-    private javax.swing.JButton btnproducto;
     private javax.swing.JButton btnventas;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
