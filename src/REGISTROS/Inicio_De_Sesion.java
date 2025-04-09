@@ -16,7 +16,7 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
     public Inicio_De_Sesion() {
         initComponents();
         
-        setSize(902,470);
+        setSize(930,470);
     }
 
 
@@ -31,6 +31,7 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
         contraseña = new LIB.FSPasswordFieldMD();
         iniciarsesion = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        registrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +53,7 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
         usuario.setBordeColorNoFocus(new java.awt.Color(209, 235, 247));
         usuario.setCaretColor(new java.awt.Color(209, 235, 247));
         usuario.setPlaceholder("INGRESAR USUARIO");
-        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, -1, -1));
+        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, -1, -1));
 
         contraseña.setBackground(new java.awt.Color(209, 235, 247));
         contraseña.setForeground(new java.awt.Color(0, 0, 0));
@@ -60,7 +61,7 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
         contraseña.setBordeColorNoFocus(new java.awt.Color(209, 235, 247));
         contraseña.setCaretColor(new java.awt.Color(209, 235, 247));
         contraseña.setPlaceholder("INGRESAR CONTRASEÑA");
-        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, -1, -1));
+        jPanel1.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, -1, -1));
 
         iniciarsesion.setBackground(new java.awt.Color(209, 235, 247));
         iniciarsesion.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -73,22 +74,32 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
                 iniciarsesionMouseClicked(evt);
             }
         });
-        jPanel1.add(iniciarsesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 300, 260, 50));
+        jPanel1.add(iniciarsesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, 260, 50));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("INGRESA A TU MENÚ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
+
+        registrar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        registrar.setForeground(new java.awt.Color(0, 0, 0));
+        registrar.setText("REGISTRAR NUEVOS USUARIOS");
+        registrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registrarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -148,13 +159,13 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
     
             JOptionPane.showMessageDialog(this, "Intentos agotados");
             System.exit(0);
-    
-        } else if(!Usuario.equals(usuario) || !Contraseña.equals(contraseña)){
-        
-            Intentos++;
-            JOptionPane.showMessageDialog(this, "Intentos " + Intentos);
-        
         }
+////        } else if(!Usuario.equals(usuario) || !Contraseña.equals(contraseña)){
+////        
+////            Intentos++;
+////            JOptionPane.showMessageDialog(this, "Intentos " + Intentos);
+////        
+////        }
         
        
               
@@ -182,6 +193,12 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
        }
         
     }//GEN-LAST:event_iniciarsesionMouseClicked
+
+    private void registrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarMouseClicked
+
+        new Registrar_Nuevos_Usuarios().setVisible(true);
+        
+    }//GEN-LAST:event_registrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -225,6 +242,7 @@ public class Inicio_De_Sesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel registrar;
     private LIB.FSTexFieldMD usuario;
     // End of variables declaration//GEN-END:variables
 }
