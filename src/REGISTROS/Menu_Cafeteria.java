@@ -15,6 +15,7 @@ import HILOS.Monitor_De_Cantidad_De_Producto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 
@@ -88,6 +89,7 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         ancla1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -319,6 +321,13 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("ADMINISTRADOR");
 
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICONOS/notification_bell_icon_178938.png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout anclaLayout = new javax.swing.GroupLayout(ancla);
         ancla.setLayout(anclaLayout);
         anclaLayout.setHorizontalGroup(
@@ -334,7 +343,9 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
                         .addComponent(menu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
-                        .addGap(430, 430, 430)
+                        .addGap(298, 298, 298)
+                        .addComponent(jLabel10)
+                        .addGap(89, 89, 89)
                         .addComponent(jLabel9)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -349,7 +360,9 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
                             .addComponent(menu)))
                     .addGroup(anclaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel9)))
+                        .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
@@ -430,6 +443,11 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         desplegar(p);
     }//GEN-LAST:event_btndetalleventaActionPerformed
 
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+        
+        JOptionPane.showMessageDialog(null, "Notificación");
+    }//GEN-LAST:event_jLabel10MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -484,6 +502,7 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
     private javax.swing.JButton btnventas;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
