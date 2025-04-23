@@ -11,7 +11,7 @@ import FORMULARIOS.Panel_Ingredientes;
 import FORMULARIOS.Panel_Producto;
 import FORMULARIOS.Panel_Ventas;
 import HILOS.Monitor_De_Cantidad_De_Producto;
-import HILOS.Reloj_;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -30,8 +30,7 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         Monitor_De_Cantidad_De_Producto Hilo_Monitor_Cantidad = new Monitor_De_Cantidad_De_Producto();
         Hilo_Monitor_Cantidad.inicio();
         
-        
-    
+
         
     }
     

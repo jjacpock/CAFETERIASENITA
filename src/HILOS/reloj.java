@@ -15,6 +15,7 @@ public class reloj extends javax.swing.JPanel implements Runnable{
         Hiloreloj.start();
         
         
+        
         setVisible(true);
         
     }
