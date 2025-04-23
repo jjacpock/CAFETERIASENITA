@@ -832,6 +832,16 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                       
                   }else{
                       
+                      int unidades_resta = (int) (CU_Disp-unidades);
+                      
+                      candis.setText(unidades_resta+"");
+                      
+                      String queryupdatecan = "update productos set cantidad_producto= "+unidades_resta+" Where id_producto= "+id_producto;
+                      
+                      con.actualizar(queryupdatecan);
+                      
+                      
+                      
                       double unidadesXvalorunitario = unidades*valorunitario;
                   
           
@@ -959,7 +969,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void btneliminartabla2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminartabla2ActionPerformed
 
-        
+                 //Declarar variables
+       Connection conect = null;
+       PreparedStatement search = null;
+       ResultSet rs = null;
         
         
          int confirmacion;
@@ -980,30 +993,90 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
                 for( int i = 0; i<tabla2.getRowCount(); i++){
 
-                DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
-                
-                double subt = Double.parseDouble(subtotal.getText().trim());
-
-                String fila_ = modelo.getValueAt(i, 4).toString();
-                
-                resta = subt-(Double.parseDouble(fila_));
-                
-                    System.out.println(fila_);
-                
-                    System.out.println(resta);
-}               
+                    try {
+                        DefaultTableModel modelo = (DefaultTableModel) tabla2.getModel();
                         
-                subtotal.setText(""+(resta));
-                
-                descuentos.removeAllItems();
-                
-                 tb2.removeRow(tabla2.getSelectedRow());
+                        double subt = Double.parseDouble(subtotal.getText().trim());
+                        
+                        String fila_ = modelo.getValueAt(i, 4).toString();
+                        double cudev = (double) modelo.getValueAt(i, 3);
+                        String nompro = modelo.getValueAt(i, 1).toString();
+                        
+                        int cudevint = (int)cudev;
+                        
+                        int un = Integer.parseInt(candis.getText());
+                        
+                        int sumadev = un+cudevint;
+                        
+                        candis.setText(""+sumadev);
+                        
+                        //Establecer Conexión con la base de datos
+                        Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+                        
+                        try {
+                            con.ConexionPostgres();
+                            
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InstantiationException ex) {
+                            Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (IllegalAccessException ex) {
+                            Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
+                        conect = con.getConnection();
+                        
+                        String buscar_BD = ("SELECT*FROM productos WHERE nombre_producto = ?");
+                        
+                        search = conect.prepareStatement(buscar_BD);
+                        
+                        search.setString(1, nompro);
+                        
+                        rs = search.executeQuery();
+                        
+                        if(rs.next()){
+                            
+                            long id_producto = rs.getLong("id_producto");
+                                                 
+                            try {
+                                con.ConexionPostgres();
+                                
+                                String devcanquery = "update productos set cantidad_producto= "+sumadev+" Where id_producto= "+id_producto;
+                                
+                                con.actualizar(devcanquery);
+                                
+                                            
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InstantiationException ex) {
+                                Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IllegalAccessException ex) {
+                                Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                            resta = subt-(Double.parseDouble(fila_));
+                            
+                            System.out.println(fila_);
+                            
+                            System.out.println(resta);
+                        }
+                        
+                        subtotal.setText(""+(resta));
+                        
+                        descuentos.removeAllItems();
+                        
+                        tb2.removeRow(tabla2.getSelectedRow());
+                        
+                        subtotal.setText("");
+                        totaldetalle.setText("");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                  
-                 subtotal.setText("");
-                 totaldetalle.setText("");
                  
-                 
-                
+                }
             }
         }
     }//GEN-LAST:event_btneliminartabla2ActionPerformed
