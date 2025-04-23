@@ -11,18 +11,17 @@ import FORMULARIOS.Panel_Ingredientes;
 import FORMULARIOS.Panel_Producto;
 import FORMULARIOS.Panel_Ventas;
 import HILOS.Monitor_De_Cantidad_De_Producto;
+import HILOS.Reloj_;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 
-
-/**
- *
- * @author Usuario
- */
 public class Menu_Cafeteria extends javax.swing.JFrame {
 
-   
+
+    
   private boolean menuAbierto = false;
            
     public Menu_Cafeteria() throws Exception {
@@ -31,9 +30,11 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         Monitor_De_Cantidad_De_Producto Hilo_Monitor_Cantidad = new Monitor_De_Cantidad_De_Producto();
         Hilo_Monitor_Cantidad.inicio();
         
+        
     
         
     }
+    
     
     public void desplegar(JPanel p ){
         
@@ -46,6 +47,9 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         
         
     }
+    
+  
+    
 
   
     @SuppressWarnings("unchecked")
@@ -322,12 +326,14 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
             anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(anclaLayout.createSequentialGroup()
                 .addComponent(pnmenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(anclaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(anclaLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(menu)
-                        .addGap(399, 399, 399)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addGap(430, 430, 430)
                         .addComponent(jLabel9)))
@@ -429,6 +435,8 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
