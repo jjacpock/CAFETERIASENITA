@@ -155,6 +155,11 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
         idproducto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         idproducto.setForeground(new java.awt.Color(0, 0, 0));
         idproducto.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(112, 138, 147), new java.awt.Color(112, 138, 147)));
+        idproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idproductoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -389,7 +394,6 @@ public class Panel_Detalle_Venta extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(candis, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3)
                     .addComponent(jScrollPane1))
@@ -784,10 +788,9 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        
-
-        
-        
+   
+        double CU_Disp = Double.parseDouble(candis.getText());
+           
         double subtotal_1= 0.0;
         
          //Declarar variables
@@ -823,7 +826,13 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                   
                   double unidades = Double.parseDouble(JOptionPane.showInputDialog(null,"Teniendo en cuenta que el valor unitario del producto es de $"+(valorunitario)+"\n"+"¿Cuantas unidades desea adquirir?","Unidades solicitadas",JOptionPane.INFORMATION_MESSAGE));
                   
-                  double unidadesXvalorunitario = unidades*valorunitario;
+                  if(unidades > CU_Disp){
+                      
+                      JOptionPane.showMessageDialog(null, "Revise las Unidades Disponibles, La Cantidad Seleccionada es mayor a las unidades disponibles","No Hay Unidades Suficientes",JOptionPane.ERROR_MESSAGE );
+                      
+                  }else{
+                      
+                      double unidadesXvalorunitario = unidades*valorunitario;
                   
           
           tb2.addRow(new  Object[]{id_producto,producto,(valorunitario),unidades,(unidadesXvalorunitario)});
@@ -906,7 +915,10 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
                   }             
              }
              
-         } catch (ClassNotFoundException ex) {
+         
+                  }
+               
+        } catch (ClassNotFoundException ex) {
              Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
          } catch (SQLException ex) {
              Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
@@ -915,7 +927,6 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
          } catch (IllegalAccessException ex) {
              Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
          }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void descuentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descuentosActionPerformed
@@ -1058,6 +1069,61 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
         idventa.requestFocus();
     }//GEN-LAST:event_iddetalleActionPerformed
+
+    private void idproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idproductoActionPerformed
+
+            idproducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {  
+            
+                try {
+                    Connection conect = null;
+                    PreparedStatement search = null;
+                    ResultSet rs = null;
+                    
+                    String pro_nom= (String) idproducto.getSelectedItem();
+                    
+                    //iniciar conexion con la BD
+                    
+                    Conexion  con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
+                    
+                    con.ConexionPostgres();
+                    
+                    conect = con.getConnection();
+                    
+                    String buscar_BD = ("SELECT*FROM productos WHERE nombre_producto = ?");
+                    
+                    search = conect.prepareStatement(buscar_BD);
+             
+             search.setString(1, pro_nom);
+             
+             rs = search.executeQuery();
+             
+             while(rs.next()){
+                 
+                 String cantidad_pro = rs.getString("cantidad_producto");
+                 
+                 candis.setText(cantidad_pro);
+                 
+             }
+                    
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Panel_Detalle_Venta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            
+            
+            
+            
+            
+            }});     
+    }//GEN-LAST:event_idproductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

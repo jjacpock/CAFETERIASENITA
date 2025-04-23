@@ -29,7 +29,7 @@ public class Panel_Producto extends javax.swing.JPanel {
     public Panel_Producto() {
         initComponents();
         
-        String ids [] = {"ID_PRODUCTO","NOMBRE","FAMILIA","PRECIO","DESCRIPCION","INGREDIENTES"};
+        String ids [] = {"ID_PRODUCTO","NOMBRE","FAMILIA","PRECIO","DESCRIPCION","INGREDIENTES","CANTIDAD"};
         
         tb.setColumnIdentifiers(ids);
         tabla.setModel(tb);
@@ -567,6 +567,7 @@ public class Panel_Producto extends javax.swing.JPanel {
                descripcion.setText(rs.getString("descripcion_producto"));
                ingredientes.setSelectedItem(rs.getString("ingrediente_producto"));
                a_vector.setText(rs.getString("ingrediente_producto"));
+               cantidad.setText(rs.getString("cantidad_producto"));
                
                
                JOptionPane.showMessageDialog(null, "Registro encontrado", "Registro Encontrado", JOptionPane.INFORMATION_MESSAGE);
@@ -651,42 +652,14 @@ public class Panel_Producto extends javax.swing.JPanel {
                 ingredientes.requestFocus();
                 return;
             }
+                        if(cantidad.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "DEBES INGRESAR CANTIDAD PARA EL PRODUCTO","CAMPO VACIO",JOptionPane.ERROR_MESSAGE);
+                cantidad.requestFocus();
+                return;
+            }
 
             //Asignar orden de los datos en la tabla
-            
-          int ADT = tb.getRowCount();
-
-for(int i = 0; i < ADT; i++) {
-    
-    // Asignar Dato en la Tabla (IDproducto)
-    long Idproducto_ADT = Long.parseLong(tb.getValueAt(i, 0).toString());
-    
-    // Asignar Dato en la Tabla (Nombre)
-    String Nombre_ADT = tb.getValueAt(i, 1).toString();
-    
-    // Asignar Dato en la Tabla (Familia)
-    String Familia_ADT = tb.getValueAt(i, 2).toString();
-    
-    // Asignar Dato en la Tabla (Precio)
-    double Precio_ADT = Double.parseDouble(tb.getValueAt(i, 3).toString());
-    
-    // Asignar Dato en la Tabla (Descripcion)
-    String Descripcion_ADT = tb.getValueAt(i, 4).toString();
-    
-    // Asignar Dato en la Tabla (Ingredientes) 
-    String Ingredientes_ADT = tb.getValueAt(i, 5).toString();
-    
-    // Imprimir los datos
-    System.out.println("Guardando datos: " +
-            "\n" + "Cedula: " + Idproducto_ADT +
-            "\n" + "Nombre: " + Nombre_ADT +
-            "\n" + "Familia: " + Familia_ADT +
-            "\n" + "Precio: " + Precio_ADT +
-            "\n" + "Descripcion: " + Descripcion_ADT +
-            "\n" + "Ingredientes: " + Ingredientes_ADT);
-}
-      
-            //Obtener Los Datos para Insertarlos
+                         //Obtener Los Datos para Insertarlos
             
             //ID_Producto
             long IDproducto= Long.parseLong(idproducto.getText().trim());
@@ -706,6 +679,8 @@ for(int i = 0; i < ADT; i++) {
             //Ingrediente
             String Ingredientes= a_vector.getText().toString();
             
+            int Cantidad = Integer.parseInt(cantidad.getText().trim());
+            
                     
             //Establecer Conexión con la base de datos
             Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
@@ -713,7 +688,7 @@ for(int i = 0; i < ADT; i++) {
             con.ConexionPostgres();
             
             //query o consulta
-            String query = "insert into productos values(?, ?, ?, ?, ?, ?)";
+            String query = "insert into productos values(?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement ps = con.getConnection().prepareStatement(query);
             
@@ -723,6 +698,7 @@ for(int i = 0; i < ADT; i++) {
             ps.setDouble(4, Precio);
             ps.setString(5, Descripcion);
             ps.setArray(6, con.getConnection().createArrayOf("integer", vector.toArray()));
+            ps.setInt(7, Cantidad);
             
             ps.executeUpdate();
             
@@ -736,7 +712,7 @@ for(int i = 0; i < ADT; i++) {
             con.cerrar();
                      
             //Mostrar Los Datos En La Tabla
-            tb.addRow(new Object []{IDproducto,Nombre,Familia,Precio,Descripcion,Ingredientes} );
+            tb.addRow(new Object []{IDproducto,Nombre,Familia,Precio,Descripcion,Ingredientes,Cantidad} );
             
             //limpiar los campos
             idproducto.setText("");
@@ -746,6 +722,7 @@ for(int i = 0; i < ADT; i++) {
             descripcion.setText("");
             ingredientes.setSelectedItem("");
             a_vector.setText("");
+            cantidad.setText("");
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Panel_Producto.class.getName()).log(Level.SEVERE, null, ex);
@@ -779,7 +756,8 @@ resultado.getString("nombre_producto"),
 resultado.getString("familia_producto"),
 resultado.getDouble("precio_producto"),
 resultado.getString("descripcion_producto"),
-resultado.getString("ingrediente_producto")
+resultado.getString("ingrediente_producto"),
+resultado.getInt("cantidad_producto")
 });
 
 }     } catch (Exception ex) {
@@ -826,41 +804,12 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
                 ingredientes.requestFocus();
                 return;
             }
-
-            //Asignar orden de los datos en la tabla
+            if(cantidad.getText().length() == 0){
+                JOptionPane.showMessageDialog(null, "DEBES INGRESAR CANTIDAD PARA EL PRODUCTO","CAMPO VACIO",JOptionPane.ERROR_MESSAGE);
+                cantidad.requestFocus();
+                return;
+            }
             
-          int ADT = tb.getRowCount();
-
-for(int i = 0; i < ADT; i++) {
-    
-    // Asignar Dato en la Tabla (IDproducto)
-    long Idproducto_ADT = Long.parseLong(tb.getValueAt(i, 0).toString());
-    
-    // Asignar Dato en la Tabla (Nombre)
-    String Nombre_ADT = tb.getValueAt(i, 1).toString();
-    
-    // Asignar Dato en la Tabla (Familia)
-    String Familia_ADT = tb.getValueAt(i, 2).toString();
-    
-    // Asignar Dato en la Tabla (Precio)
-    double Precio_ADT = Double.parseDouble(tb.getValueAt(i, 3).toString());
-    
-    // Asignar Dato en la Tabla (Descripcion)
-    String Descripcion_ADT = tb.getValueAt(i, 4).toString();
-    
-    // Asignar Dato en la Tabla (Ingredientes) 
-    String Ingredientes_ADT = tb.getValueAt(i, 5).toString();
-    
-    // Imprimir los datos
-    System.out.println("Guardando datos: " +
-            "\n" + "Cedula: " + Idproducto_ADT +
-            "\n" + "Nombre: " + Nombre_ADT +
-            "\n" + "Familia: " + Familia_ADT +
-            "\n" + "Precio: " + Precio_ADT +
-            "\n" + "Descripcion: " + Descripcion_ADT +
-            "\n" + "Ingredientes: " + Ingredientes_ADT);
-}
-      
             //Obtener Los Datos para Insertarlos
             
             //ID_Producto
@@ -879,9 +828,10 @@ for(int i = 0; i < ADT; i++) {
             String Descripcion= descripcion.getText().trim();
             
             //Ingrediente
-            String Ingredientes= ingredientes.getSelectedItem().toString();
+            String Ingredientes= a_vector.getText();
             
-                    
+             int Cantidad = Integer.parseInt(cantidad.getText().trim());       
+            
             //Establecer Conexión con la base de datos
             Conexion con = new Conexion("postgres", "1986", "localhost", "5432", "cafeteriasenita");
             
@@ -893,7 +843,8 @@ for(int i = 0; i < ADT; i++) {
                     + "familia_producto= '"+Familia+"', "
                     + "precio_producto= "+Precio+" , "
                     + "descripcion_producto= '"+Descripcion+"', "
-                    + "ingrediente_producto= '"+Ingredientes+"' "
+                    + "ingrediente_producto= '"+Ingredientes+"', "
+                    +"cantidad_producto= "+Cantidad+""
                     +" WHERE id_producto= "+IDproducto;
             
             System.out.println(query);
@@ -905,15 +856,17 @@ for(int i = 0; i < ADT; i++) {
             con.cerrar();
                      
             //Mostrar Los Datos En La Tabla
-            tb.addRow(new Object []{IDproducto,Nombre,Familia,Precio,Descripcion,Ingredientes} );
+            tb.addRow(new Object []{IDproducto,Nombre,Familia,Precio,Descripcion,Ingredientes,Cantidad} );
             
             //limpiar los campos
             idproducto.setText("");
             nombre.setText("");
             familia.setSelectedItem("");
+            a_vector.setText("");
             precio.setText("");
             descripcion.setText("");
             ingredientes.setSelectedItem("");
+            cantidad.setText("");
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Panel_Producto.class.getName()).log(Level.SEVERE, null, ex);
@@ -947,7 +900,8 @@ resultado.getString("nombre_producto"),
 resultado.getString("familia_producto"),
 resultado.getDouble("precio_producto"),
 resultado.getString("descripcion_producto"),
-resultado.getString("ingrediente_producto")
+resultado.getString("ingrediente_producto"),
+resultado.getInt("cantidad_producto")
 });
 
 }     } catch (Exception ex) {
@@ -1040,7 +994,8 @@ resultado.getString("nombre_producto"),
 resultado.getString("familia_producto"),
 resultado.getDouble("precio_producto"),
 resultado.getString("descripcion_producto"),
-resultado.getString("ingrediente_producto")      
+resultado.getString("ingrediente_producto"),
+resultado.getInt("cantidad_producto")
 });
 
 }     } catch (Exception ex) {
