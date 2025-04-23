@@ -10,6 +10,9 @@ import FORMULARIOS.Panel_Familia;
 import FORMULARIOS.Panel_Ingredientes;
 import FORMULARIOS.Panel_Producto;
 import FORMULARIOS.Panel_Ventas;
+import HILOS.Monitor_De_Cantidad_De_Producto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -22,8 +25,11 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
    
   private boolean menuAbierto = false;
            
-    public Menu_Cafeteria() {
+    public Menu_Cafeteria() throws Exception {
         initComponents();
+        
+        Monitor_De_Cantidad_De_Producto Hilo_Monitor_Cantidad = new Monitor_De_Cantidad_De_Producto();
+        Hilo_Monitor_Cantidad.inicio();
         
     
         
@@ -450,7 +456,11 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu_Cafeteria().setVisible(true);
+                try {
+                    new Menu_Cafeteria().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Menu_Cafeteria.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

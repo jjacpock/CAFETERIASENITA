@@ -1068,14 +1068,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
                nombre.requestFocus();
                return;
            }
-        
-          
-            if(!texto.matches("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$")){
-            label_nombre.setForeground(Color.red);
-            label_nombre.setText("¡EL FORMATO NO ES CORRECTO!");
-            nombre.requestFocus();
-            return;
-        }else{
+           else{
             label_nombre.setText("");
         }
     }//GEN-LAST:event_nombreKeyReleased
