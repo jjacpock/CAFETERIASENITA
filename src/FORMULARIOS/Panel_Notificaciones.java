@@ -1,5 +1,9 @@
 package FORMULARIOS;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,17 +11,23 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class Panel_Notificaciones extends javax.swing.JPanel {
 
     DefaultTableModel tb = new DefaultTableModel();
 
+    private Panel_Producto panelProducto;
+    
     public Panel_Notificaciones() {
         try {
             initComponents();
             
-            String columns[] = {"Notificación"};
+            
+            
+            String columns[] = {"Notificación","Estado"};
             
             tb.setColumnIdentifiers(columns);
             
@@ -38,11 +48,68 @@ public class Panel_Notificaciones extends javax.swing.JPanel {
             while(rs.next()){
                 String cn_ = rs.getString("contenido_notificacion");
                 String estado_noti = rs.getString("estado_notificacion");
-                
-                tb.addRow(new Object[]{cn_});
+                            
+                tb.addRow(new Object[]{cn_,estado_noti});
                 
             }
+            Tabla_Notificaciones.getColumnModel().getColumn(1).setMinWidth(0);
+            Tabla_Notificaciones.getColumnModel().getColumn(1).setMaxWidth(0);
+            Tabla_Notificaciones.getColumnModel().getColumn(1).setWidth(0);
             
+            
+                  Tabla_Notificaciones.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value,
+                                                              boolean isSelected, boolean hasFocus,
+                                                              int row, int column) {
+                    Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                    String estado = (String) table.getValueAt(row, 1); // columna oculta: estado_notificacion
+
+                    if ("Activo".equalsIgnoreCase(estado)) {
+                        c.setBackground(new Color(204, 255, 204)); // verde claro 
+                    } else if ("Inactivo".equalsIgnoreCase(estado)) {
+                        c.setBackground(new Color(255, 204, 204)); // rojo claro
+                    } else {
+                        c.setBackground(Color.WHITE); // por defecto
+                    }
+
+                    if (isSelected) {                    
+                        c.setBackground(c.getBackground().darker());
+                        
+                    }
+
+                    return c;
+                }
+            });   
+                  
+                  // Añadir un MouseListener a la tabla para detectar clics en las filas
+        Tabla_Notificaciones.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Obtener la fila en la que se hizo clic
+                int filaSeleccionada = Tabla_Notificaciones.rowAtPoint(e.getPoint());
+                if (filaSeleccionada >= 0) {
+                    // Mostrar un mensaje con los datos de la fila seleccionada
+
+                    String noti__ = (String) Tabla_Notificaciones.getValueAt(filaSeleccionada, 0);  // Producto
+                    String Estado_  =  (String) Tabla_Notificaciones.getValueAt(filaSeleccionada, 1);  // Stock
+                    
+                    String producto = noti__.replace("Debe Surtir El Producto ", "").replace(" ¡LAS UNIDADES ESTAN A PUNTO DE AGOTARSE!", "");
+
+                    // Realizar una acción (Ejemplo: mostrar un mensaje)
+                    System.out.println(noti__);
+                    System.out.println(producto);
+                    
+                    
+                    
+                    
+                    
+                    // Opcional: Cambiar el color de la fila seleccionada
+                    Tabla_Notificaciones.setSelectionBackground(Color.LIGHT_GRAY);  // Cambiar color de selección
+                }
+            }
+        });
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Panel_Notificaciones.class.getName()).log(Level.SEVERE, null, ex);

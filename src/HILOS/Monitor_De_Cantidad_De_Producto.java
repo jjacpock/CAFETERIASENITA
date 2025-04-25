@@ -55,7 +55,7 @@ public class Monitor_De_Cantidad_De_Producto implements Runnable{
               
             while(Hilo_Monitor==HiloActual){
                 
-// 1. Desactivar notificaciones activas de productos que ya tienen suficiente stock
+                                        // 1. Desactivar notificaciones activas de productos que ya tienen suficiente stock
 String desactivar = """
     UPDATE notificaciones
     SET estado_notificacion = 'Inactivo'
@@ -77,10 +77,10 @@ int desactivadas = psDesactivar.executeUpdate();
 
 if (desactivadas > 0) {
     System.out.println("🔕 " + desactivadas + " notificaciones se marcaron como Inactivo.");
-}
-
-
-                       
+}       
+                
+                
+                
                 String Query = "Select * From productos where cantidad_producto<40";
                 
                 temp = con.consultar(Query);
@@ -88,7 +88,32 @@ if (desactivadas > 0) {
                 try{
                         
                     while(temp.next()){
-              
+                        
+                        String activar = """
+    UPDATE notificaciones
+    SET estado_notificacion = 'Activo'
+    WHERE contenido_notificacion LIKE 'Debe Surtir El Producto %'
+    AND contenido_notificacion IN (
+        SELECT contenido_notificacion
+        FROM notificaciones
+        WHERE estado_notificacion = 'Inactivo'
+    )
+    AND EXISTS (
+        SELECT 1 FROM productos p
+        WHERE ('Debe Surtir El Producto ' || p.nombre_producto || ' ¡LAS UNIDADES ESTAN A PUNTO DE AGOTARSE!') = notificaciones.contenido_notificacion
+        AND p.cantidad_producto < 40
+    )
+""";
+
+PreparedStatement psActivar = con.getConnection().prepareStatement(activar);
+int activadas = psActivar.executeUpdate();
+
+if (activadas > 0) {
+    System.out.println("🔔 " + activadas + " notificaciones se marcaron como Activo.");
+}
+
+                          
+                                 
                         
                         boolean noti_exi = false;
                         

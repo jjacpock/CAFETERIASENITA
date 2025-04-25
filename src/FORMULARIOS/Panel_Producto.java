@@ -24,9 +24,17 @@ public class Panel_Producto extends javax.swing.JPanel {
     Vector<Integer> vector = new Vector<>();
 
     DefaultTableModel tb = new DefaultTableModel();
-
+  
+    public void setProductoSeleccionado(String nombreProducto) {
+        nombre.setText(nombreProducto);
+    }
+    
     
     public Panel_Producto() {
+        
+        
+        
+        
         initComponents();
         
         String ids [] = {"ID_PRODUCTO","NOMBRE","FAMILIA","PRECIO","DESCRIPCION","INGREDIENTES","CANTIDAD"};
@@ -1166,7 +1174,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR PRODUCTOS DESDE LA BASE DE 
     private javax.swing.JLabel label_descripcion;
     private javax.swing.JLabel label_nombre;
     private javax.swing.JLabel label_precio;
-    private javax.swing.JTextField nombre;
+    public javax.swing.JTextField nombre;
     private javax.swing.JTextField precio;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
