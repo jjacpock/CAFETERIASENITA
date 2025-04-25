@@ -2,6 +2,7 @@
 package HILOS;
 
 import FORMULARIOS.Conexion;
+import FORMULARIOS.Panel_Notificaciones;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -38,6 +39,7 @@ public class Monitor_De_Cantidad_De_Producto implements Runnable{
             Connection conect = null;
             PreparedStatement ps = null;        
             ResultSet temp;
+            ResultSet rs;
             
             Thread HiloActual = Thread.currentThread();
             
@@ -52,20 +54,20 @@ public class Monitor_De_Cantidad_De_Producto implements Runnable{
                 temp = con.consultar(Query);
                 
                 try{
-                    
-                    while(temp.next()){
                         
+                    while(temp.next()){
+                                     
                         conect = con.getConnection();
                         
                         String nom_pro = temp.getString("nombre_producto");
                         int cantidades = Integer.parseInt(temp.getString("cantidad_producto"));
                         
                         String info_noti = "Debe Surtir El Producto "+nom_pro+"\n"+"¡LAS UNIDADES ("+cantidades+") ESTAN A PUNTO DE AGOTARSE!";
-                                             
+                        
                         String query_noti = "insert into notificaciones (contenido_notificacion, estado_notificacion) values (?,?)";
-                        
+                         
                         ps = conect.prepareStatement(query_noti);
-                        
+
                         ps.setString(1, info_noti);
                         ps.setString(2, "Activo");
                         
@@ -76,8 +78,8 @@ public class Monitor_De_Cantidad_De_Producto implements Runnable{
                         JOptionPane.showMessageDialog(null, "Debe Surtir El Producto "+nom_pro+"\n"+"¡LAS UNIDADES ("+cantidades+") ESTAN A PUNTO DE AGOTARSE!", "Surtir Producto", JOptionPane.WARNING_MESSAGE);
                         System.out.println("Debe Surtir El Producto "+nom_pro+"\n"+"¡LAS UNIDADES ESTAN A PUNTO DE AGOTARSE!");
                         pausa(30000);
-                        
-                    }
+                       
+                   }                                    
                 }catch(SQLException e){}           
             }
             
