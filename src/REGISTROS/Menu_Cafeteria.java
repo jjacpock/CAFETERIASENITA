@@ -450,14 +450,6 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
         Panel_Notificaciones PN = new Panel_Notificaciones();
         desplegar(PN);
 
-        
-
-
-
-
-
-        
-        JOptionPane.showMessageDialog(null, "Notificación");
     }//GEN-LAST:event_jLabel10MouseClicked
 
     /**

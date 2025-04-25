@@ -1083,7 +1083,7 @@ JOptionPane.showMessageDialog(null, "ERROR AL CARGAR DETALLES DE VENTA DESDE LA 
 
     private void familiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_familiaActionPerformed
 
-        String descuento_seleccionado = familia.getSelectedItem().toString();
+        
         
         
         familia.addActionListener(new ActionListener() {
