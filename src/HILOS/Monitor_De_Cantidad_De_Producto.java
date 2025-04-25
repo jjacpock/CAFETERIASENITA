@@ -56,13 +56,23 @@ public class Monitor_De_Cantidad_De_Producto implements Runnable{
                 try{
                         
                     while(temp.next()){
-                                     
+              
                         conect = con.getConnection();
                         
                         String nom_pro = temp.getString("nombre_producto");
                         int cantidades = Integer.parseInt(temp.getString("cantidad_producto"));
                         
                         String info_noti = "Debe Surtir El Producto "+nom_pro+"\n"+"¡LAS UNIDADES ("+cantidades+") ESTAN A PUNTO DE AGOTARSE!";
+                        
+                        String validar = "SELECT COUNT (*) FROM notificaciones WHERE contenido_notificacion = ?";
+                        
+                        ps= conect.prepareStatement(validar);
+                        
+                        ps.setString(1, info_noti);
+                        
+                        rs= ps.executeQuery();
+                        
+
                         
                         String query_noti = "insert into notificaciones (contenido_notificacion, estado_notificacion) values (?,?)";
                          
