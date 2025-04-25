@@ -2,6 +2,8 @@
 package HILOS;
 
 import FORMULARIOS.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +35,8 @@ public class Monitor_De_Cantidad_De_Producto implements Runnable{
     public void run() {
         
         try {
-            
+            Connection conect = null;
+            PreparedStatement ps = null;        
             ResultSet temp;
             
             Thread HiloActual = Thread.currentThread();
@@ -52,8 +55,23 @@ public class Monitor_De_Cantidad_De_Producto implements Runnable{
                     
                     while(temp.next()){
                         
+                        conect = con.getConnection();
+                        
                         String nom_pro = temp.getString("nombre_producto");
                         int cantidades = Integer.parseInt(temp.getString("cantidad_producto"));
+                        
+                        String info_noti = "Debe Surtir El Producto "+nom_pro+"\n"+"¡LAS UNIDADES ("+cantidades+") ESTAN A PUNTO DE AGOTARSE!";
+                                             
+                        String query_noti = "insert into notificaciones (contenido_notificacion, estado_notificacion) values (?,?)";
+                        
+                        ps = conect.prepareStatement(query_noti);
+                        
+                        ps.setString(1, info_noti);
+                        ps.setString(2, "Activo");
+                        
+                        ps.executeUpdate();
+                        
+                        
                         
                         JOptionPane.showMessageDialog(null, "Debe Surtir El Producto "+nom_pro+"\n"+"¡LAS UNIDADES ("+cantidades+") ESTAN A PUNTO DE AGOTARSE!", "Surtir Producto", JOptionPane.WARNING_MESSAGE);
                         System.out.println("Debe Surtir El Producto "+nom_pro+"\n"+"¡LAS UNIDADES ESTAN A PUNTO DE AGOTARSE!");

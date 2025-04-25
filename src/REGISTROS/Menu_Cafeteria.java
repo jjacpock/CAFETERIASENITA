@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import FORMULARIOS.Panel_Empleados;
 import FORMULARIOS.Panel_Familia;
 import FORMULARIOS.Panel_Ingredientes;
+import FORMULARIOS.Panel_Notificaciones;
 import FORMULARIOS.Panel_Producto;
 import FORMULARIOS.Panel_Ventas;
 import HILOS.Monitor_De_Cantidad_De_Producto;
@@ -360,9 +361,9 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
                             .addComponent(menu)))
                     .addGroup(anclaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))))
+                        .addGroup(anclaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ancla1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
@@ -444,6 +445,17 @@ public class Menu_Cafeteria extends javax.swing.JFrame {
     }//GEN-LAST:event_btndetalleventaActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+
+
+        Panel_Notificaciones PN = new Panel_Notificaciones();
+        desplegar(PN);
+
+        
+
+
+
+
+
         
         JOptionPane.showMessageDialog(null, "Notificación");
     }//GEN-LAST:event_jLabel10MouseClicked
